@@ -387,16 +387,14 @@ class SpeakerDecoder(NeuralModule):
             emb_layers.append(layer)
 
         self.emb_layers = nn.ModuleList(emb_layers)
-
+        self.relu = nn.ReLU()
         self.final = nn.Linear(shapes[-1], self._num_classes, bias=bias)
 
         self.apply(lambda x: init_weights(x, mode=init_mode))
 
     def affineLayer(self, inp_shape, out_shape, learn_mean=True):
         layer = nn.Sequential(
-            nn.Linear(inp_shape, out_shape),
-            nn.BatchNorm1d(out_shape, affine=learn_mean, track_running_stats=True),
-            nn.ReLU(),
+            nn.Linear(inp_shape, out_shape), nn.BatchNorm1d(out_shape, affine=learn_mean, track_running_stats=True)
         )
 
         return layer
@@ -404,11 +402,12 @@ class SpeakerDecoder(NeuralModule):
     @typecheck()
     def forward(self, encoder_output):
         pool = self._pooling(encoder_output)
-        embs = []
+        emb = []
 
         for layer in self.emb_layers:
-            pool, emb = layer(pool), layer[: self.emb_id](pool)
-            embs.append(emb)
+            pool = layer(pool)
+            emb = pool.clone()
+            pool = self.relu(pool)
 
         if self.angular:
             for W in self.final.parameters():
@@ -417,4 +416,4 @@ class SpeakerDecoder(NeuralModule):
 
         out = self.final(pool)
 
-        return out, embs[-1]
+        return out, emb

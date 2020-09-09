@@ -175,7 +175,14 @@ class EncDecSpeakerLabelModel(ModelPT):
         logits, _ = self.forward(input_signal=audio_signal, input_signal_length=audio_signal_len)
         self.loss_value = self.loss(logits=logits, labels=labels)
         correct_counts, total_counts = self._accuracy(logits=logits, labels=labels)
-        return {'val_loss': self.loss_value, 'val_correct_counts': correct_counts, 'val_total_counts': total_counts}
+        tensorboard_log = {'val_step_loss': self.loss_value}
+
+        return {
+            'val_loss': self.loss_value,
+            'val_correct_counts': correct_counts,
+            'val_total_counts': total_counts,
+            'log': tensorboard_log,
+        }
 
     def multi_validation_epoch_end(self, outputs, dataloader_idx: int = 0):
         self.val_loss_mean = torch.stack([x['val_loss'] for x in outputs]).mean()

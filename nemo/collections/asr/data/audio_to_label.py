@@ -137,7 +137,8 @@ target_label_n, "offset": offset_in_sec_n}
                     signal = torch.cat((rep_sig, sub))
                     new_audio_lengths.append(torch.tensor(fixed_length))
                 else:
-                    start_idx = torch.randint(0, chunck_len, (1,)) if chunck_len else torch.tensor(0)
+                    start_idx = torch.tensor(0)
+                    # start_idx = torch.randint(0, chunck_len, (1,)) if chunck_len else torch.tensor(0)
                     end_idx = start_idx + fixed_length
                     signal = sig[start_idx:end_idx]
                     new_audio_lengths.append(torch.tensor(fixed_length))
