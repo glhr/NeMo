@@ -111,7 +111,7 @@ class NeuralModuleFactory(object):
         self,
         local_rank=None,
         optimization_level=Optimization.mxprO0,
-        placement=DeviceType.CPU,
+        placement=None,
         cudnn_benchmark=False,
         random_seed=None,
         set_default=True,

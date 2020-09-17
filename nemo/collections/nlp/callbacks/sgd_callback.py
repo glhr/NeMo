@@ -115,7 +115,7 @@ def eval_iter_callback(tensors, global_vars, schema_processor, eval_dataset):
     max_span_p = torch.max(total_scores.view(-1, max_num_noncat_slots, max_num_tokens ** 2), axis=-1)[0]
     predictions['noncat_slot_p'] = max_span_p
 
-    span_start_index = torch.floor_divide(max_span_index, max_num_tokens)
+    span_start_index = torch.div(max_span_index, max_num_tokens)
     span_end_index = torch.fmod(max_span_index, max_num_tokens)
 
     predictions['noncat_slot_start'] = span_start_index
