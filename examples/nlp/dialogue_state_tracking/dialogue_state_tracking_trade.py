@@ -40,7 +40,7 @@ from nemo.utils.lr_policies import get_lr_policy
 
 parser = argparse.ArgumentParser(description='Dialogue state tracking with TRADE model on MultiWOZ dataset')
 parser.add_argument("--data_dir", default='data/multiwoz2.1', type=str)
-parser.add_argument("--work_dir", default='outputs', type=str)
+parser.add_argument("--work_dir", default='output/TRADE', type=str)
 parser.add_argument("--checkpoint_dir", default=None, type=str)
 
 parser.add_argument("--batch_size", default=16, type=int)
