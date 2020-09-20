@@ -2,7 +2,6 @@
 *.model
 *.pkl
 #*.ipynb
-output
 result
 *.pt
 tests/data/asr
