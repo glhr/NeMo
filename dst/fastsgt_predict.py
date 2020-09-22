@@ -40,7 +40,6 @@ from nemo.collections.nlp.data.datasets.sgd_dataset.schema_processor import Sche
 from nemo.collections.nlp.nm.trainables import SGDDecoderNM, SGDEncoderNM
 from nemo.core import CheckpointCallback, EvaluatorCallback, NeuralModuleFactory, SimpleLossLoggerCallback
 from nemo.utils import logging
-from nemo.utils.lr_policies import get_lr_policy
 
 import nemo.collections.nlp.data.datasets.sgd_dataset.metrics as metrics
 from nemo.utils import logging
@@ -633,7 +632,7 @@ def truncate_seq_pair(tokens_a, tokens_b, max_length):
 __all__ = ['FILE_RANGES', 'PER_FRAME_OUTPUT_FILENAME', 'SGDDataProcessor']
 
 FILE_RANGES = {
-    "dstc8_single_domain": {"train": range(1, 44), "dev": range(1, 8), "test": range(1, 12), "custom": range(1, 2)},
+    "dstc8_single_domain": {"train": range(1, 2), "dev": range(1, 2), "test": range(1, 2), "custom": range(1, 2)},
     "dstc8_multi_domain": {"train": range(44, 128), "dev": range(8, 21), "test": range(12, 35)},
     "dstc8_all": {"train": range(1, 128), "dev": range(1, 21), "test": range(1, 35)},
     "multiwoz": {"train": range(1, 18), "dev": range(1, 3), "test": range(1, 3)},
@@ -1575,7 +1574,8 @@ schema_preprocessor = SchemaPreprocessor(
     add_carry_value=add_carry_value,
     add_carry_status=add_carry_status,
     mode=args.schema_emb_init,
-    is_trainable=args.train_schema_emb,
+    is_trainable=False,
+    datasets=['train', 'test', 'dev']
 )
 
 dialogues_processor = SGDDataProcessor(
@@ -1654,10 +1654,7 @@ tensors = create_pipeline(dataset_split=dataset)
 
 logging.warning("Eval")
 
-# tensors = nf.infer(tensors=eval_tensors)
-# print(tensors)
-# eval_callbacks = [get_eval_callback('custom')]
-values_dict = nf.infer(tensors=tensors)
+values_dict = nf.infer(tensors=tensors, checkpoint_dir=args.checkpoint_dir)
 eval_iter_callback(values_dict, schema_preprocessor, dataset)
 eval_epochs_done_callback(
     args.task_name,
@@ -1671,17 +1668,3 @@ eval_epochs_done_callback(
     args.joint_acc_across_turn,
     args.no_fuzzy_match,
 )
-
-# nf.train(
-#     tensors_to_optimize=train_tensors,
-#     callbacks=[train_callback, ckpt_callback] + eval_callbacks,
-#     lr_policy=lr_policy_fn,
-#     optimizer=args.optimizer_kind,
-#     optimization_params={
-#         "num_epochs": args.num_epochs,
-#         "lr": args.learning_rate,
-#         "eps": 1e-6,
-#         "weight_decay": args.weight_decay,
-#         "grad_norm_clip": args.grad_norm_clip,
-#     },
-# )

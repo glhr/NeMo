@@ -579,6 +579,7 @@ class PtActions(Actions):
                     else:  # NON-DISTRIBUTED TRAINING
                         values_dict["IS_FROM_DIST_EVAL"] = False
                         values_dict[key] = [registered_e_tensors[key]]
+                # logging.info(values_dict)
                 if callback.user_iter_callback and (self.global_rank is None or self.global_rank == 0):
                     # values_dict will contain results from all workers
                     callback.user_iter_callback(values_dict, callback._global_var_dict)
@@ -598,9 +599,7 @@ class PtActions(Actions):
                     if hasattr(callback, 'wandb_log'):
                         callback.wandb_log(vals_to_log)
 
-    def _infer(
-        self, tensors_to_return, verbose=False, cache=False, use_cache=False, offload_to_cpu=True,
-    ):
+    def _infer(self, tensors_to_return, verbose=False, cache=False, use_cache=False, offload_to_cpu=True):
         """
         Does the same as _eval() just with tensors instead of eval callback.
         """
@@ -776,7 +775,8 @@ class PtActions(Actions):
                 inferred_tensors = []
                 for t in tensors_to_return:
                     inferred_tensors.append(values_dict[t.unique_name])
-                return inferred_tensors
+                # print(values_dict)
+                return values_dict
 
             # For all other ranks
             return None
