@@ -31,23 +31,208 @@ import torch
 import argparse
 import math
 import os
+import glob
+import collections
 
 import nemo.collections.nlp as nemo_nlp
 import nemo.collections.nlp.data.datasets.sgd_dataset.prediction_utils as pred_utils
-from nemo.collections.nlp.data.datasets.sgd_dataset.evaluate import (
-    ALL_SERVICES,
-    PER_FRAME_OUTPUT_FILENAME,
-    SEEN_SERVICES,
-    UNSEEN_SERVICES,
-    get_dataset_as_dict,
-    get_in_domain_services,
-    get_metrics,
-)
 from nemo.collections.nlp.data.datasets.sgd_dataset.schema_processor import SchemaPreprocessor
 from nemo.collections.nlp.nm.trainables import SGDDecoderNM, SGDEncoderNM
 from nemo.core import CheckpointCallback, EvaluatorCallback, NeuralModuleFactory, SimpleLossLoggerCallback
 from nemo.utils import logging
 from nemo.utils.lr_policies import get_lr_policy
+
+import nemo.collections.nlp.data.datasets.sgd_dataset.metrics as metrics
+from nemo.utils import logging
+
+__all__ = [
+    'get_in_domain_services',
+    'get_dataset_as_dict',
+    'ALL_SERVICES',
+    'SEEN_SERVICES',
+    'UNSEEN_SERVICES',
+    'get_metrics',
+    'PER_FRAME_OUTPUT_FILENAME',
+]
+
+ALL_SERVICES = "#ALL_SERVICES"
+SEEN_SERVICES = "#SEEN_SERVICES"
+UNSEEN_SERVICES = "#UNSEEN_SERVICES"
+
+# Name of the file containing all predictions and their corresponding frame metrics.
+PER_FRAME_OUTPUT_FILENAME = "dialogues_and_metrics.json"
+
+
+def get_service_set(schema_path):
+    """Get the set of all services present in a schema."""
+    service_set = set()
+    with open(schema_path) as f:
+        schema = json.load(f)
+        for service in schema:
+            service_set.add(service["service_name"])
+        f.close()
+    return service_set
+
+
+def get_in_domain_services(schema_path, service_set):
+    """Get the set of common services between a schema and set of services.
+    Args:
+        schema_path (str): path to schema file
+        service_set (set): set of services
+    """
+    return get_service_set(schema_path) & service_set
+
+
+def get_dataset_as_dict(file_path_patterns):
+    """Read the DSTC8/SGD json dialogue data as dictionary with dialog ID as keys."""
+    dataset_dict = {}
+    if isinstance(file_path_patterns, list):
+        list_fp = file_path_patterns
+    else:
+        list_fp = sorted(glob.glob(file_path_patterns))
+    for fp in list_fp:
+        if PER_FRAME_OUTPUT_FILENAME in fp:
+            continue
+        logging.debug("Loading file: %s", fp)
+        with open(fp) as f:
+            data = json.load(f)
+            if isinstance(data, list):
+                for dial in data:
+                    dataset_dict[dial["dialogue_id"]] = dial
+            elif isinstance(data, dict):
+                dataset_dict.update(data)
+            f.close()
+    return dataset_dict
+
+
+def get_metrics(dataset_ref, dataset_hyp, service_schemas, in_domain_services, joint_acc_across_turn, no_fuzzy_match):
+    """Calculate the DSTC8/SGD metrics.
+
+  Args:
+    dataset_ref: The ground truth dataset represented as a dict mapping dialogue
+      id to the corresponding dialogue.
+    dataset_hyp: The predictions in the same format as `dataset_ref`.
+    service_schemas: A dict mapping service name to the schema for the service.
+    in_domain_services: The set of services which are present in the training
+      set.
+    schemas: Schemas with information for all services
+
+  Returns:
+    A dict mapping a metric collection name to a dict containing the values
+    for various metrics. Each metric collection aggregates the metrics across
+    a specific set of frames in the dialogues.
+  """
+    # Metrics can be aggregated in various ways, eg over all dialogues, only for
+    # dialogues containing unseen services or for dialogues corresponding to a
+    # single service. This aggregation is done through metric_collections, which
+    # is a dict mapping a collection name to a dict, which maps a metric to a list
+    # of values for that metric. Each value in this list is the value taken by
+    # the metric on a frame.
+    metric_collections = collections.defaultdict(lambda: collections.defaultdict(list))
+
+    # Ensure the dialogs in dataset_hyp also occur in dataset_ref.
+    assert set(dataset_hyp.keys()).issubset(set(dataset_ref.keys()))
+    logging.debug("len(dataset_hyp)=%d, len(dataset_ref)=%d", len(dataset_hyp), len(dataset_ref))
+
+    # Store metrics for every frame for debugging.
+    per_frame_metric = {}
+
+    for dial_id, dial_hyp in dataset_hyp.items():
+        seen = True
+        dial_ref = dataset_ref[dial_id]
+
+        if set(dial_ref["services"]) != set(dial_hyp["services"]):
+            raise ValueError(
+                "Set of services present in ground truth and predictions don't match "
+                "for dialogue with id {}".format(dial_id)
+            )
+
+        joint_metrics = [metrics.JOINT_GOAL_ACCURACY, metrics.JOINT_CAT_ACCURACY, metrics.JOINT_NONCAT_ACCURACY]
+        for turn_id, (turn_ref, turn_hyp) in enumerate(zip(dial_ref["turns"], dial_hyp["turns"])):
+            metric_collections_per_turn = collections.defaultdict(lambda: collections.defaultdict(lambda: 1.0))
+            if turn_ref["speaker"] != turn_hyp["speaker"]:
+                raise ValueError("Speakers don't match in dialogue with id {}".format(dial_id))
+
+            # Skip system turns because metrics are only computed for user turns.
+            if turn_ref["speaker"] != "USER":
+                continue
+
+            if turn_ref["utterance"] != turn_hyp["utterance"]:
+                logging.error("Ref utt: %s", turn_ref["utterance"])
+                logging.error("Hyp utt: %s", turn_hyp["utterance"])
+                raise ValueError("Utterances don't match for dialogue with id {}".format(dial_id))
+
+            hyp_frames_by_service = {frame["service"]: frame for frame in turn_hyp["frames"]}
+
+            # Calculate metrics for each frame in each user turn.
+            for frame_ref in turn_ref["frames"]:
+                service_name = frame_ref["service"]
+                if service_name not in hyp_frames_by_service:
+                    raise ValueError(
+                        "Frame for service {} not found in dialogue with id {}".format(service_name, dial_id)
+                    )
+                service = service_schemas[service_name]
+                frame_hyp = hyp_frames_by_service[service_name]
+
+                active_intent_acc = metrics.get_active_intent_accuracy(frame_ref, frame_hyp)
+                slot_tagging_f1_scores = metrics.get_slot_tagging_f1(
+                    frame_ref, frame_hyp, turn_ref["utterance"], service
+                )
+                requested_slots_f1_scores = metrics.get_requested_slots_f1(frame_ref, frame_hyp)
+                goal_accuracy_dict = metrics.get_average_and_joint_goal_accuracy(
+                    frame_ref, frame_hyp, service, no_fuzzy_match
+                )
+
+                frame_metric = {
+                    metrics.ACTIVE_INTENT_ACCURACY: active_intent_acc,
+                    metrics.REQUESTED_SLOTS_F1: requested_slots_f1_scores.f1,
+                    metrics.REQUESTED_SLOTS_PRECISION: requested_slots_f1_scores.precision,
+                    metrics.REQUESTED_SLOTS_RECALL: requested_slots_f1_scores.recall,
+                }
+                if slot_tagging_f1_scores is not None:
+                    frame_metric[metrics.SLOT_TAGGING_F1] = slot_tagging_f1_scores.f1
+                    frame_metric[metrics.SLOT_TAGGING_PRECISION] = slot_tagging_f1_scores.precision
+                    frame_metric[metrics.SLOT_TAGGING_RECALL] = slot_tagging_f1_scores.recall
+                frame_metric.update(goal_accuracy_dict)
+
+                frame_id = "{:s}-{:03d}-{:s}".format(dial_id, turn_id, frame_hyp["service"])
+                per_frame_metric[frame_id] = frame_metric
+                # Add the frame-level metric result back to dialogues.
+                frame_hyp["metrics"] = frame_metric
+
+                # Get the domain name of the service.
+                domain_name = frame_hyp["service"].split("_")[0]
+                domain_keys = [ALL_SERVICES, frame_hyp["service"], domain_name]
+                if frame_hyp["service"] in in_domain_services and seen:
+                    domain_keys.append(SEEN_SERVICES)
+                else:
+                    seen = False
+                    domain_keys.append(UNSEEN_SERVICES)
+                for domain_key in domain_keys:
+                    for metric_key, metric_value in frame_metric.items():
+                        if metric_value != metrics.NAN_VAL:
+                            if joint_acc_across_turn and metric_key in joint_metrics:
+                                metric_collections_per_turn[domain_key][metric_key] *= metric_value
+                            else:
+                                metric_collections[domain_key][metric_key].append(metric_value)
+            if joint_acc_across_turn:
+                # Conduct multiwoz style evaluation that computes joint goal accuracy
+                # across all the slot values of all the domains for each turn.
+                for domain_key in metric_collections_per_turn:
+                    for metric_key, metric_value in metric_collections_per_turn[domain_key].items():
+                        metric_collections[domain_key][metric_key].append(metric_value)
+
+    all_metric_aggregate = {}
+    for domain_key, domain_metric_vals in metric_collections.items():
+        domain_metric_aggregate = {}
+        for metric_key, value_list in domain_metric_vals.items():
+            if value_list:
+                # Metrics are macro-averaged across all frames.
+                domain_metric_aggregate[metric_key] = round(float(np.mean(value_list)) * 100.0, 2)
+            else:
+                domain_metric_aggregate[metric_key] = metrics.NAN_VAL
+        all_metric_aggregate[domain_key] = domain_metric_aggregate
+    return all_metric_aggregate, per_frame_metric
 
 __all__ = ['InputExample', 'STR_DONTCARE', 'STATUS_OFF', 'STATUS_ACTIVE', 'STATUS_DONTCARE', 'truncate_seq_pair']
 
@@ -953,7 +1138,7 @@ class SGDDataProcessor(object):
 
 
 
-
+global_vars = dict()
 
 __all__ = ['eval_iter_callback', 'eval_epochs_done_callback']
 
@@ -972,7 +1157,8 @@ def get_str_example_id(eval_dataset, ids_to_service_names_dict, example_id_num):
     return list(map(format_turn_id, tensor2list(example_id_num)))
 
 
-def eval_iter_callback(tensors, global_vars, schema_processor, eval_dataset):
+def eval_iter_callback(tensors, schema_processor, eval_dataset):
+    global global_vars
     if 'predictions' not in global_vars:
         global_vars['predictions'] = []
 
@@ -1068,7 +1254,6 @@ def combine_predictions_in_example(predictions, batch_size):
 
 
 def eval_epochs_done_callback(
-    global_vars,
     task_name,
     eval_dataset,
     data_dir,
@@ -1080,10 +1265,6 @@ def eval_epochs_done_callback(
     joint_acc_across_turn,
     no_fuzzy_match,
 ):
-    # added for debugging
-    in_domain_services = get_in_domain_services(
-        os.path.join(data_dir, eval_dataset, "schema.json"), dialogues_processor.get_seen_services("train")
-    )
     ##############
     # we'll write predictions to file in Dstc8/SGD format during evaluation callback
     prediction_dir = os.path.join(prediction_dir, 'predictions', 'pred_res_{}_{}'.format(eval_dataset, task_name))
@@ -1097,42 +1278,8 @@ def eval_epochs_done_callback(
         schemas=schema_emb_preprocessor.schemas,
         tracker_model=tracker_model,
         eval_debug=eval_debug,
-        in_domain_services=in_domain_services,
+        in_domain_services=set(),
     )
-    metrics = evaluate(
-        prediction_dir, data_dir, eval_dataset, in_domain_services, joint_acc_across_turn, no_fuzzy_match,
-    )
-    return metrics[SEEN_SERVICES]
-
-
-def evaluate(prediction_dir, data_dir, eval_dataset, in_domain_services, joint_acc_across_turn, no_fuzzy_match):
-
-    with open(os.path.join(data_dir, eval_dataset, "schema.json")) as f:
-        eval_services = {}
-        list_services = json.load(f)
-        for service in list_services:
-            eval_services[service["service_name"]] = service
-        f.close()
-
-    dataset_ref = get_dataset_as_dict(os.path.join(data_dir, eval_dataset, "dialogues_*.json"))
-    dataset_hyp = get_dataset_as_dict(os.path.join(prediction_dir, "*.json"))
-
-    all_metric_aggregate, _ = get_metrics(
-        dataset_ref, dataset_hyp, eval_services, in_domain_services, joint_acc_across_turn, no_fuzzy_match
-    )
-    if SEEN_SERVICES in all_metric_aggregate:
-        logging.info(f'Dialog metrics for {SEEN_SERVICES}  : {sorted(all_metric_aggregate[SEEN_SERVICES].items())}')
-    if UNSEEN_SERVICES in all_metric_aggregate:
-        logging.info(f'Dialog metrics for {UNSEEN_SERVICES}: {sorted(all_metric_aggregate[UNSEEN_SERVICES].items())}')
-    if ALL_SERVICES in all_metric_aggregate:
-        logging.info(f'Dialog metrics for {ALL_SERVICES}   : {sorted(all_metric_aggregate[ALL_SERVICES].items())}')
-
-    # Write the per-frame metrics values with the corrresponding dialogue frames.
-    with open(os.path.join(prediction_dir, PER_FRAME_OUTPUT_FILENAME), "w") as f:
-        json.dump(dataset_hyp, f, indent=2, separators=(",", ": "))
-        f.close()
-    return all_metric_aggregate
-
 
 # Parsing arguments
 parser = argparse.ArgumentParser(description='Schema_guided_dst')
@@ -1453,7 +1600,7 @@ def create_pipeline(dataset_split='train'):
         dataset_split=dataset_split,
         dialogues_processor=dialogues_processor,
         batch_size=args.train_batch_size,
-        shuffle=not args.no_shuffle if dataset_split == 'train' else False,
+        shuffle=False,
         num_workers=args.num_workers,
         pin_memory=args.enable_pin_memory,
     )
@@ -1480,113 +1627,61 @@ def create_pipeline(dataset_split='train'):
         intent_status_mask=data.intent_status_mask,
         service_ids=data.service_id,
     )
+    tensors = [
+        data.example_id_num,
+        data.service_id,
+        data.is_real_example,
+        data.start_char_idx,
+        data.end_char_idx,
+        logit_intent_status,
+        logit_req_slot_status,
+        logit_cat_slot_status,
+        logit_cat_slot_value,
+        logit_noncat_slot_status,
+        logit_noncat_slot_start,
+        logit_noncat_slot_end,
+        data.intent_status_labels,
+        data.requested_slot_status,
+        data.categorical_slot_status,
+        data.categorical_slot_values,
+        data.noncategorical_slot_status,
+    ]
 
-    if dataset_split == 'train':
-        loss = dst_loss(
-            logit_intent_status=logit_intent_status,
-            intent_status_labels=data.intent_status_labels,
-            logit_req_slot_status=logit_req_slot_status,
-            requested_slot_status=data.requested_slot_status,
-            req_slot_mask=data.req_slot_mask,
-            logit_cat_slot_status=logit_cat_slot_status,
-            categorical_slot_status=data.categorical_slot_status,
-            cat_slot_status_mask=data.cat_slot_status_mask,
-            logit_cat_slot_value=logit_cat_slot_value,
-            categorical_slot_values=data.categorical_slot_values,
-            logit_noncat_slot_status=logit_noncat_slot_status,
-            noncategorical_slot_status=data.noncategorical_slot_status,
-            noncat_slot_status_mask=data.noncat_slot_status_mask,
-            logit_noncat_slot_start=logit_noncat_slot_start,
-            logit_noncat_slot_end=logit_noncat_slot_end,
-            noncategorical_slot_value_start=data.noncategorical_slot_value_start,
-            noncategorical_slot_value_end=data.noncategorical_slot_value_end,
-        )
-        tensors = [loss]
-    else:
-        tensors = [
-            data.example_id_num,
-            data.service_id,
-            data.is_real_example,
-            data.start_char_idx,
-            data.end_char_idx,
-            logit_intent_status,
-            logit_req_slot_status,
-            logit_cat_slot_status,
-            logit_cat_slot_value,
-            logit_noncat_slot_status,
-            logit_noncat_slot_start,
-            logit_noncat_slot_end,
-            data.intent_status_labels,
-            data.requested_slot_status,
-            data.categorical_slot_status,
-            data.categorical_slot_values,
-            data.noncategorical_slot_status,
-        ]
+    return tensors
 
-    steps_per_epoch = math.ceil(len(datalayer) / (args.train_batch_size * args.num_gpus))
-    return steps_per_epoch, tensors
+dataset = 'custom'
+tensors = create_pipeline(dataset_split=dataset)
 
+logging.warning("Eval")
 
-steps_per_epoch, train_tensors = create_pipeline(dataset_split='train')
-logging.info(f'Steps per epoch: {steps_per_epoch}')
-
-# Create trainer and execute training action
-train_callback = SimpleLossLoggerCallback(
-    tensors=train_tensors,
-    print_func=lambda x: logging.info("Loss: {:.8f}".format(x[0].item())),
-    get_tb_values=lambda x: [["loss", x[0]]],
-    tb_writer=nf.tb_writer,
-    step_freq=args.loss_log_freq if args.loss_log_freq > 0 else steps_per_epoch,
+# tensors = nf.infer(tensors=eval_tensors)
+# print(tensors)
+# eval_callbacks = [get_eval_callback('custom')]
+values_dict = nf.infer(tensors=tensors)
+eval_iter_callback(values_dict, schema_preprocessor, dataset)
+eval_epochs_done_callback(
+    args.task_name,
+    dataset,
+    args.data_dir,
+    nf.work_dir,
+    args.tracker_model,
+    args.debug_mode,
+    dialogues_processor,
+    schema_preprocessor,
+    args.joint_acc_across_turn,
+    args.no_fuzzy_match,
 )
 
-
-def get_eval_callback(eval_dataset):
-    _, eval_tensors = create_pipeline(dataset_split=eval_dataset)
-    eval_callback = EvaluatorCallback(
-        eval_tensors=eval_tensors,
-        user_iter_callback=lambda x, y: eval_iter_callback(x, y, schema_preprocessor, eval_dataset),
-        user_epochs_done_callback=lambda x: eval_epochs_done_callback(
-            x,
-            args.task_name,
-            eval_dataset,
-            args.data_dir,
-            nf.work_dir,
-            args.tracker_model,
-            args.debug_mode,
-            dialogues_processor,
-            schema_preprocessor,
-            args.joint_acc_across_turn,
-            args.no_fuzzy_match,
-        ),
-        tb_writer=nf.tb_writer,
-        eval_step=args.eval_epoch_freq * steps_per_epoch,
-    )
-    return eval_callback
-
-
-if args.eval_dataset == 'dev_test':
-    eval_callbacks = [get_eval_callback('dev'), get_eval_callback('test')]
-else:
-    eval_callbacks = [get_eval_callback(args.eval_dataset)]
-
-ckpt_callback = CheckpointCallback(
-    folder=nf.checkpoint_dir, epoch_freq=args.save_epoch_freq, step_freq=args.save_step_freq, checkpoints_to_keep=1
-)
-
-lr_policy_fn = get_lr_policy(
-    args.lr_policy, total_steps=args.num_epochs * steps_per_epoch, warmup_ratio=args.lr_warmup_proportion
-)
-
-nf.train(
-    tensors_to_optimize=train_tensors,
-    callbacks=[train_callback, ckpt_callback] + eval_callbacks,
-    lr_policy=lr_policy_fn,
-    optimizer=args.optimizer_kind,
-    optimization_params={
-        "num_epochs": args.num_epochs,
-        "lr": args.learning_rate,
-        "eps": 1e-6,
-        "weight_decay": args.weight_decay,
-        "grad_norm_clip": args.grad_norm_clip,
-    },
-)
+# nf.train(
+#     tensors_to_optimize=train_tensors,
+#     callbacks=[train_callback, ckpt_callback] + eval_callbacks,
+#     lr_policy=lr_policy_fn,
+#     optimizer=args.optimizer_kind,
+#     optimization_params={
+#         "num_epochs": args.num_epochs,
+#         "lr": args.learning_rate,
+#         "eps": 1e-6,
+#         "weight_decay": args.weight_decay,
+#         "grad_norm_clip": args.grad_norm_clip,
+#     },
+# )
