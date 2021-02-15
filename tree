@@ -1,0 +1,1652 @@
+.
+├── build
+│   ├── bdist.linux-x86_64
+│   └── lib
+│       ├── nemo
+│       │   ├── backends
+│       │   │   ├── __init__.py
+│       │   │   ├── load_backend.py
+│       │   │   ├── pytorch
+│       │   │   │   ├── actions.py
+│       │   │   │   ├── common
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── losses.py
+│       │   │   │   │   ├── metrics.py
+│       │   │   │   │   ├── multi_data.py
+│       │   │   │   │   ├── other.py
+│       │   │   │   │   ├── parts.py
+│       │   │   │   │   ├── rnn.py
+│       │   │   │   │   ├── search.py
+│       │   │   │   │   └── zero_data.py
+│       │   │   │   ├── __init__.py
+│       │   │   │   ├── module_wrapper.py
+│       │   │   │   ├── nm.py
+│       │   │   │   ├── optimizers.py
+│       │   │   │   ├── torchvision
+│       │   │   │   │   ├── data
+│       │   │   │   │   │   ├── image_folder.py
+│       │   │   │   │   │   └── __init__.py
+│       │   │   │   │   ├── helpers.py
+│       │   │   │   │   └── __init__.py
+│       │   │   │   └── tutorials
+│       │   │   │       ├── chatbot
+│       │   │   │       │   ├── data.py
+│       │   │   │       │   ├── __init__.py
+│       │   │   │       │   └── modules.py
+│       │   │   │       ├── __init__.py
+│       │   │   │       └── toys.py
+│       │   │   └── torch_backend.py
+│       │   ├── collections
+│       │   │   ├── asr
+│       │   │   │   ├── audio_preprocessing.py
+│       │   │   │   ├── beam_search_decoder.py
+│       │   │   │   ├── contextnet.py
+│       │   │   │   ├── data_layer.py
+│       │   │   │   ├── greedy_ctc_decoder.py
+│       │   │   │   ├── helpers.py
+│       │   │   │   ├── __init__.py
+│       │   │   │   ├── jasper.py
+│       │   │   │   ├── las
+│       │   │   │   │   ├── helpers.py
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   └── misc.py
+│       │   │   │   ├── losses.py
+│       │   │   │   ├── metrics.py
+│       │   │   │   ├── models
+│       │   │   │   │   ├── asrconvctcmodel.py
+│       │   │   │   │   └── __init__.py
+│       │   │   │   └── parts
+│       │   │   │       ├── cleaners.py
+│       │   │   │       ├── collections.py
+│       │   │   │       ├── dataset.py
+│       │   │   │       ├── features.py
+│       │   │   │       ├── __init__.py
+│       │   │   │       ├── jasper.py
+│       │   │   │       ├── manifest.py
+│       │   │   │       ├── numba_utils.py
+│       │   │   │       ├── parsers.py
+│       │   │   │       ├── perturb.py
+│       │   │   │       ├── segment.py
+│       │   │   │       └── spectr_augment.py
+│       │   │   ├── cv
+│       │   │   │   ├── examples
+│       │   │   │   │   ├── cifar100_vgg16_ffn_image_classification.py
+│       │   │   │   │   ├── cifar10_convnet_ffn_image_classification.py
+│       │   │   │   │   ├── cifar10_resnet50_image_classification.py
+│       │   │   │   │   ├── mnist_convnet_ffn_image_classification.py
+│       │   │   │   │   ├── mnist_ffn_image_classification.py
+│       │   │   │   │   └── mnist_lenet5_image_classification.py
+│       │   │   │   ├── __init__.py
+│       │   │   │   └── modules
+│       │   │   │       ├── data_layers
+│       │   │   │       │   ├── cifar100_datalayer.py
+│       │   │   │       │   ├── cifar10_datalayer.py
+│       │   │   │       │   ├── __init__.py
+│       │   │   │       │   ├── mnist_datalayer.py
+│       │   │   │       │   └── stl10_datalayer.py
+│       │   │   │       ├── __init__.py
+│       │   │   │       ├── losses
+│       │   │   │       │   ├── __init__.py
+│       │   │   │       │   └── nll_loss.py
+│       │   │   │       ├── non_trainables
+│       │   │   │       │   ├── __init__.py
+│       │   │   │       │   ├── non_linearity.py
+│       │   │   │       │   └── reshape_tensor.py
+│       │   │   │       └── trainables
+│       │   │   │           ├── convnet_encoder.py
+│       │   │   │           ├── feed_forward_network.py
+│       │   │   │           ├── image_encoder.py
+│       │   │   │           ├── __init__.py
+│       │   │   │           └── lenet5.py
+│       │   │   ├── __init__.py
+│       │   │   ├── nlp
+│       │   │   │   ├── callbacks
+│       │   │   │   │   ├── glue_benchmark_callback.py
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── joint_intent_slot_callback.py
+│       │   │   │   │   ├── lasertagger_callback.py
+│       │   │   │   │   ├── lm_bert_callback.py
+│       │   │   │   │   ├── lm_transformer_callback.py
+│       │   │   │   │   ├── machine_translation_callback.py
+│       │   │   │   │   ├── punctuation_capitalization_callback.py
+│       │   │   │   │   ├── qa_squad_callback.py
+│       │   │   │   │   ├── sgd_callback.py
+│       │   │   │   │   ├── state_tracking_trade_callback.py
+│       │   │   │   │   ├── text_classification_callback.py
+│       │   │   │   │   └── token_classification_callback.py
+│       │   │   │   ├── data
+│       │   │   │   │   ├── datasets
+│       │   │   │   │   │   ├── datasets_utils
+│       │   │   │   │   │   │   ├── data_preprocessing.py
+│       │   │   │   │   │   │   ├── datasets_processing.py
+│       │   │   │   │   │   │   └── __init__.py
+│       │   │   │   │   │   ├── glue_benchmark_dataset
+│       │   │   │   │   │   │   ├── data_processors.py
+│       │   │   │   │   │   │   ├── glue_benchmark_dataset.py
+│       │   │   │   │   │   │   └── __init__.py
+│       │   │   │   │   │   ├── __init__.py
+│       │   │   │   │   │   ├── joint_intent_slot_dataset
+│       │   │   │   │   │   │   ├── inference_utils.py
+│       │   │   │   │   │   │   ├── __init__.py
+│       │   │   │   │   │   │   ├── joint_intent_slot_dataset.py
+│       │   │   │   │   │   │   └── joint_intent_slot_descriptor.py
+│       │   │   │   │   │   ├── lasertagger_dataset.py
+│       │   │   │   │   │   ├── lm_bert_dataset.py
+│       │   │   │   │   │   ├── lm_transformer_dataset.py
+│       │   │   │   │   │   ├── machine_translation_dataset.py
+│       │   │   │   │   │   ├── multiwoz_dataset
+│       │   │   │   │   │   │   ├── dbquery.py
+│       │   │   │   │   │   │   ├── __init__.py
+│       │   │   │   │   │   │   ├── multiwoz_dataset.py
+│       │   │   │   │   │   │   ├── multiwoz_slot_trans.py
+│       │   │   │   │   │   │   └── state.py
+│       │   │   │   │   │   ├── punctuation_capitalization_dataset.py
+│       │   │   │   │   │   ├── qa_squad_dataset
+│       │   │   │   │   │   │   ├── qa_squad_dataset.py
+│       │   │   │   │   │   │   └── qa_squad_processing.py
+│       │   │   │   │   │   ├── sgd_dataset
+│       │   │   │   │   │   │   ├── data_processor.py
+│       │   │   │   │   │   │   ├── evaluate.py
+│       │   │   │   │   │   │   ├── input_example.py
+│       │   │   │   │   │   │   ├── metrics.py
+│       │   │   │   │   │   │   ├── prediction_utils.py
+│       │   │   │   │   │   │   ├── schema_embedding_dataset.py
+│       │   │   │   │   │   │   ├── schema_processor.py
+│       │   │   │   │   │   │   ├── schema.py
+│       │   │   │   │   │   │   └── sgd_dataset.py
+│       │   │   │   │   │   ├── text_classification
+│       │   │   │   │   │   │   ├── __init__.py
+│       │   │   │   │   │   │   ├── text_classification_dataset.py
+│       │   │   │   │   │   │   └── text_classification_descriptor.py
+│       │   │   │   │   │   └── token_classification_dataset.py
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   └── tokenizers
+│       │   │   │   │       ├── bert_tokenizer.py
+│       │   │   │   │       ├── char_tokenizer.py
+│       │   │   │   │       ├── fairseq_tokenizer.py
+│       │   │   │   │       ├── gpt2_tokenizer.py
+│       │   │   │   │       ├── __init__.py
+│       │   │   │   │       ├── sentencepiece_tokenizer.py
+│       │   │   │   │       ├── tokenizer_spec.py
+│       │   │   │   │       ├── tokenizer_utils.py
+│       │   │   │   │       ├── word_tokenizer.py
+│       │   │   │   │       └── youtokentome_tokenizer.py
+│       │   │   │   ├── __init__.py
+│       │   │   │   ├── metrics
+│       │   │   │   │   ├── bleu.py
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── sacrebleu.py
+│       │   │   │   │   └── squad_metrics.py
+│       │   │   │   ├── neural_types.py
+│       │   │   │   ├── nm
+│       │   │   │   │   ├── data_layers
+│       │   │   │   │   │   ├── bert_inference_datalayer.py
+│       │   │   │   │   │   ├── glue_benchmark_datalayer.py
+│       │   │   │   │   │   ├── __init__.py
+│       │   │   │   │   │   ├── joint_intent_slot_datalayer.py
+│       │   │   │   │   │   ├── lasertagger_datalayer.py
+│       │   │   │   │   │   ├── lm_bert_datalayer.py
+│       │   │   │   │   │   ├── lm_transformer_datalayer.py
+│       │   │   │   │   │   ├── machine_translation_datalayer.py
+│       │   │   │   │   │   ├── punctuation_capitalization_datalayer.py
+│       │   │   │   │   │   ├── qa_squad_datalayer.py
+│       │   │   │   │   │   ├── state_tracking_sgd_datalayer.py
+│       │   │   │   │   │   ├── state_tracking_trade_datalayer.py
+│       │   │   │   │   │   ├── text_classification_datalayer.py
+│       │   │   │   │   │   ├── text_datalayer.py
+│       │   │   │   │   │   └── token_classification_datalayer.py
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── losses
+│       │   │   │   │   │   ├── __init__.py
+│       │   │   │   │   │   ├── masked_xentropy_loss.py
+│       │   │   │   │   │   ├── sgd_loss.py
+│       │   │   │   │   │   ├── smoothed_cross_entropy_loss.py
+│       │   │   │   │   │   └── spanning_loss.py
+│       │   │   │   │   ├── non_trainables
+│       │   │   │   │   │   ├── dialogue_state_tracking
+│       │   │   │   │   │   │   ├── rule_based_dpm_multiwoz.py
+│       │   │   │   │   │   │   ├── system_utterance_history_update.py
+│       │   │   │   │   │   │   ├── template_nlg_multiwoz.py
+│       │   │   │   │   │   │   ├── trade_state_update_nm.py
+│       │   │   │   │   │   │   └── user_utterance_encoder.py
+│       │   │   │   │   │   └── __init__.py
+│       │   │   │   │   └── trainables
+│       │   │   │   │       ├── common
+│       │   │   │   │       │   ├── common_utils.py
+│       │   │   │   │       │   ├── encoder_rnn.py
+│       │   │   │   │       │   ├── huggingface
+│       │   │   │   │       │   │   ├── albert_nm.py
+│       │   │   │   │       │   │   ├── bert_nm.py
+│       │   │   │   │       │   │   ├── huggingface_utils.py
+│       │   │   │   │       │   │   ├── __init__.py
+│       │   │   │   │       │   │   └── roberta_nm.py
+│       │   │   │   │       │   ├── __init__.py
+│       │   │   │   │       │   ├── megatron
+│       │   │   │   │       │   │   ├── __init__.py
+│       │   │   │   │       │   │   ├── megatron_bert_nm.py
+│       │   │   │   │       │   │   └── megatron_utils.py
+│       │   │   │   │       │   ├── sequence_classification_nm.py
+│       │   │   │   │       │   ├── sequence_regression_nm.py
+│       │   │   │   │       │   ├── token_classification_nm.py
+│       │   │   │   │       │   └── transformer
+│       │   │   │   │       │       ├── __init__.py
+│       │   │   │   │       │       ├── transformer_decoders.py
+│       │   │   │   │       │       ├── transformer_encoders.py
+│       │   │   │   │       │       ├── transformer_generators.py
+│       │   │   │   │       │       ├── transformer_modules.py
+│       │   │   │   │       │       └── transformer_nm.py
+│       │   │   │   │       ├── dialogue_state_tracking
+│       │   │   │   │       │   ├── __init__.py
+│       │   │   │   │       │   ├── sgd
+│       │   │   │   │       │   │   ├── __init__.py
+│       │   │   │   │       │   │   ├── sgd_decoder_nm.py
+│       │   │   │   │       │   │   └── sgd_encoder_nm.py
+│       │   │   │   │       │   └── trade_generator_nm.py
+│       │   │   │   │       ├── __init__.py
+│       │   │   │   │       ├── joint_intent_slot
+│       │   │   │   │       │   ├── __init__.py
+│       │   │   │   │       │   └── joint_intent_slot_classifier_nm.py
+│       │   │   │   │       └── punctuation_capitalization
+│       │   │   │   │           ├── __init__.py
+│       │   │   │   │           └── punctuation_capitalization_classifier_nm.py
+│       │   │   │   └── utils
+│       │   │   │       ├── callback_utils.py
+│       │   │   │       ├── data_utils.py
+│       │   │   │       ├── evaluation_utils.py
+│       │   │   │       ├── functional_utils.py
+│       │   │   │       ├── __init__.py
+│       │   │   │       └── transformer_utils.py
+│       │   │   ├── simple_gan
+│       │   │   │   ├── gan.py
+│       │   │   │   └── __init__.py
+│       │   │   └── tts
+│       │   │       ├── data_layers.py
+│       │   │       ├── fastspeech_modules.py
+│       │   │       ├── __init__.py
+│       │   │       ├── parts
+│       │   │       │   ├── datasets.py
+│       │   │       │   ├── fastspeech.py
+│       │   │       │   ├── fastspeech_transformer.py
+│       │   │       │   ├── helpers.py
+│       │   │       │   ├── __init__.py
+│       │   │       │   ├── layers.py
+│       │   │       │   ├── manifest.py
+│       │   │       │   ├── tacotron2.py
+│       │   │       │   ├── talknet.py
+│       │   │       │   └── waveglow.py
+│       │   │       ├── tacotron2_modules.py
+│       │   │       ├── talknet_modules.py
+│       │   │       └── waveglow_modules.py
+│       │   ├── constants.py
+│       │   ├── core
+│       │   │   ├── actions.py
+│       │   │   ├── callbacks.py
+│       │   │   ├── deprecated_callbacks.py
+│       │   │   ├── __init__.py
+│       │   │   ├── module_decorators.py
+│       │   │   ├── nemo_model.py
+│       │   │   ├── neural_factory.py
+│       │   │   ├── neural_graph.py
+│       │   │   ├── neural_interface.py
+│       │   │   ├── neural_modules.py
+│       │   │   └── neural_types
+│       │   │       ├── axes.py
+│       │   │       ├── comparison.py
+│       │   │       ├── elements.py
+│       │   │       ├── __init__.py
+│       │   │       └── neural_type.py
+│       │   ├── __init__.py
+│       │   ├── package_info.py
+│       │   ├── README.md
+│       │   └── utils
+│       │       ├── app_state.py
+│       │       ├── argparse.py
+│       │       ├── configuration_error.py
+│       │       ├── configuration_parsing.py
+│       │       ├── decorators
+│       │       │   ├── deprecated.py
+│       │       │   ├── __init__.py
+│       │       │   └── port_docs.py
+│       │       ├── env_var_parsing.py
+│       │       ├── exp_logging.py
+│       │       ├── formatters
+│       │       │   ├── base.py
+│       │       │   ├── colors.py
+│       │       │   ├── __init__.py
+│       │       │   └── utils.py
+│       │       ├── helpers.py
+│       │       ├── __init__.py
+│       │       ├── lr_policies.py
+│       │       ├── metaclasses.py
+│       │       ├── misc.py
+│       │       ├── nemo_logging.py
+│       │       ├── neural_graph
+│       │       │   ├── connection.py
+│       │       │   ├── graph_inputs.py
+│       │       │   ├── graph_outputs.py
+│       │       │   ├── neural_graph_manager.py
+│       │       │   └── object_registry.py
+│       │       └── nmtensor_registry.py
+│       ├── scripts
+│       │   ├── build_lm_text.py
+│       │   ├── convert_to_tarred_audio_dataset.py
+│       │   ├── convert_wav_to_g711wav.py
+│       │   ├── export_bert_to_trt.py
+│       │   ├── export_jasper_onnx_to_trt.py
+│       │   ├── export_jasper_to_onnx.py
+│       │   ├── fisher_audio_to_wav.py
+│       │   ├── get_aishell_data.py
+│       │   ├── get_databaker_data.py
+│       │   ├── get_hi-mia_data.py
+│       │   ├── get_librispeech_data.py
+│       │   ├── get_ljspeech_data.py
+│       │   ├── get_timit_data.py
+│       │   ├── __init__.py
+│       │   ├── integration
+│       │   │   ├── get_collections.py
+│       │   │   ├── get_module_outputs.py
+│       │   │   ├── get_module_ports.py
+│       │   │   ├── get_modules.py
+│       │   │   ├── __init__.py
+│       │   │   └── validate_connections.py
+│       │   ├── process_aishell2_data.py
+│       │   ├── process_an4_data.py
+│       │   ├── process_fisher_data.py
+│       │   ├── process_hub5_data.py
+│       │   ├── process_speech_commands_data.py
+│       │   ├── process_vad_data.py
+│       │   ├── quartznet_model_for_jarvis.py
+│       │   └── scp_to_manifest.py
+│       └── tests
+│           ├── conftest.py
+│           ├── __init__.py
+│           └── unit
+│               ├── core
+│               │   ├── __init__.py
+│               │   ├── tensorrt_format.py
+│               │   ├── tensorrt_loaders.py
+│               │   ├── tensorrt_runner.py
+│               │   ├── test_actions_api.py
+│               │   ├── test_deploy_export.py
+│               │   ├── test_model.py
+│               │   ├── test_nemo_callbacks.py
+│               │   ├── test_neural_types.py
+│               │   ├── test_nm_tensor.py
+│               │   ├── test_policies.py
+│               │   └── test_weight_share.py
+│               ├── __init__.py
+│               ├── test_huggingface.py
+│               ├── test_spc_tokenizer.py
+│               ├── test_torch_backend.py
+│               ├── test_tutorials_cornell_data.py
+│               ├── test_unit_asr.py
+│               ├── test_unit_multidataset.py
+│               └── test_unit_speech_commands.py
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── dist
+│   └── nemo_toolkit-0.11.0-py3.6.egg
+├── Dockerfile
+├── Dockerfile.jetson
+├── docs
+│   ├── docs_zh
+│   │   └── sources
+│   │       ├── Makefile
+│   │       ├── source
+│   │       │   ├── api-docs
+│   │       │   │   ├── modules.rst
+│   │       │   │   └── nemo.rst
+│   │       │   ├── asr
+│   │       │   │   ├── asr_all.bib
+│   │       │   │   ├── ctc_asr.png
+│   │       │   │   ├── datasets.rst
+│   │       │   │   ├── intro.rst
+│   │       │   │   ├── jasper_layers.png
+│   │       │   │   ├── jasper.png
+│   │       │   │   ├── jasper.rst
+│   │       │   │   ├── jasper_vertical.png
+│   │       │   │   ├── models.rst
+│   │       │   │   ├── quartznet.rst
+│   │       │   │   ├── quartz_vertical.png
+│   │       │   │   └── tutorial.rst
+│   │       │   ├── collections
+│   │       │   │   ├── core.rst
+│   │       │   │   ├── modules.rst
+│   │       │   │   ├── nemo_asr.rst
+│   │       │   │   ├── nemo_nlp.rst
+│   │       │   │   └── nemo_tts.rst
+│   │       │   ├── conf.py
+│   │       │   ├── index.rst
+│   │       │   ├── nlp
+│   │       │   │   ├── asr-improvement.rst
+│   │       │   │   ├── bert_pretraining.rst
+│   │       │   │   ├── dialogue_state_tracking_trade.rst
+│   │       │   │   ├── dst_multiwoz_example.png
+│   │       │   │   ├── dst_trade_architecture.png
+│   │       │   │   ├── interactive_translation.png
+│   │       │   │   ├── intro.rst
+│   │       │   │   ├── joint_intent_slot_filling.rst
+│   │       │   │   ├── ner.rst
+│   │       │   │   ├── neural_machine_translation.rst
+│   │       │   │   ├── nlp_all_refs.bib
+│   │       │   │   ├── punctuation.rst
+│   │       │   │   ├── question_answering.rst
+│   │       │   │   └── transformer_language_model.rst
+│   │       │   ├── speech_command
+│   │       │   │   ├── datasets.rst
+│   │       │   │   ├── intro.rst
+│   │       │   │   ├── models.rst
+│   │       │   │   ├── quartznet.rst
+│   │       │   │   ├── quartz_vertical.png
+│   │       │   │   ├── speech_recognition_all.bib
+│   │       │   │   └── tutorial.rst
+│   │       │   ├── training.rst
+│   │       │   ├── tts
+│   │       │   │   ├── datasets.rst
+│   │       │   │   ├── fastspeech.rst
+│   │       │   │   ├── intro.rst
+│   │       │   │   ├── models.rst
+│   │       │   │   ├── tacotron2.rst
+│   │       │   │   ├── tutorial.rst
+│   │       │   │   └── waveglow.rst
+│   │       │   └── tutorials
+│   │       │       ├── callbacks.rst
+│   │       │       ├── chatbot.png
+│   │       │       ├── complex_training.rst
+│   │       │       ├── custommodules.rst
+│   │       │       ├── examples.rst
+│   │       │       ├── intro.rst
+│   │       │       ├── module_configuration.rst
+│   │       │       ├── module_custom_configuration.rst
+│   │       │       ├── neuraltypes.rst
+│   │       │       ├── nm_class_structure.png
+│   │       │       ├── program_model.rst
+│   │       │       └── weightsharing.rst
+│   │       └── update_docs.sh
+│   └── sources
+│       ├── Makefile
+│       ├── source
+│       │   ├── api-docs
+│       │   │   ├── modules.rst
+│       │   │   └── nemo.rst
+│       │   ├── asr
+│       │   │   ├── 8kHz_models.rst
+│       │   │   ├── asr_all.bib
+│       │   │   ├── ctc_asr.png
+│       │   │   ├── datasets.rst
+│       │   │   ├── installation.rst
+│       │   │   ├── intro.rst
+│       │   │   ├── jasper_layers.png
+│       │   │   ├── jasper.rst
+│       │   │   ├── jasper_vertical.png
+│       │   │   ├── models.rst
+│       │   │   ├── quartznet.rst
+│       │   │   ├── quartz_vertical.png
+│       │   │   └── tutorial.rst
+│       │   ├── chinese
+│       │   │   └── intro.rst
+│       │   ├── collections
+│       │   │   ├── core.rst
+│       │   │   ├── modules.rst
+│       │   │   ├── nemo_asr.rst
+│       │   │   ├── nemo_cv.rst
+│       │   │   ├── nemo_nlp.rst
+│       │   │   └── nemo_tts.rst
+│       │   ├── conf.py
+│       │   ├── index.rst
+│       │   ├── nlp
+│       │   │   ├── asr-improvement.rst
+│       │   │   ├── bert_pretraining.rst
+│       │   │   ├── dialogue_state_tracking_sgd.rst
+│       │   │   ├── dialogue_state_tracking_trade.rst
+│       │   │   ├── dst_multiwoz_example.png
+│       │   │   ├── dst_sgd_schema_example.png
+│       │   │   ├── dst_sgd_system_frame.png
+│       │   │   ├── dst_sgd_user_frame.png
+│       │   │   ├── dst_trade_architecture.png
+│       │   │   ├── glue.rst
+│       │   │   ├── interactive_translation.png
+│       │   │   ├── intro.rst
+│       │   │   ├── joint_intent_slot_filling.rst
+│       │   │   ├── megatron_finetuning.rst
+│       │   │   ├── ner.rst
+│       │   │   ├── neural_machine_translation.rst
+│       │   │   ├── nlp_all_refs.bib
+│       │   │   ├── punctuation.rst
+│       │   │   ├── question_answering.rst
+│       │   │   ├── text_classification.rst
+│       │   │   └── transformer_language_model.rst
+│       │   ├── speaker_recognition
+│       │   │   ├── datasets.rst
+│       │   │   ├── installation_link.rst
+│       │   │   ├── intro.rst
+│       │   │   ├── models.rst
+│       │   │   ├── quartznet.rst
+│       │   │   ├── speaker.bib
+│       │   │   └── tutorial.rst
+│       │   ├── speech_command
+│       │   │   ├── datasets.rst
+│       │   │   ├── installation_link.rst
+│       │   │   ├── intro.rst
+│       │   │   ├── models.rst
+│       │   │   ├── quartznet.rst
+│       │   │   ├── quartz_vertical.png
+│       │   │   ├── speech_recognition_all.bib
+│       │   │   ├── temporal_se.png
+│       │   │   └── tutorial.rst
+│       │   ├── training.rst
+│       │   ├── tts
+│       │   │   ├── datasets.rst
+│       │   │   ├── fastspeech.rst
+│       │   │   ├── intro.rst
+│       │   │   ├── models.rst
+│       │   │   ├── tacotron2.rst
+│       │   │   ├── tutorial.rst
+│       │   │   └── waveglow.rst
+│       │   ├── tutorials
+│       │   │   ├── callbacks.rst
+│       │   │   ├── chatbot.png
+│       │   │   ├── complex_training.rst
+│       │   │   ├── custommodules.rst
+│       │   │   ├── examples.rst
+│       │   │   ├── intro.rst
+│       │   │   ├── module_configuration.rst
+│       │   │   ├── module_custom_configuration.rst
+│       │   │   ├── neural_graphs_general.png
+│       │   │   ├── neural_graphs_nesting.png
+│       │   │   ├── neural_graphs.rst
+│       │   │   ├── neuraltypes.rst
+│       │   │   ├── nm_class_structure.png
+│       │   │   ├── old_callbacks.rst
+│       │   │   ├── program_model.rst
+│       │   │   └── weightsharing.rst
+│       │   └── voice_activity_detection
+│       │       ├── datasets.rst
+│       │       ├── installation_link.rst
+│       │       ├── intro.rst
+│       │       ├── matchboxnet.rst
+│       │       ├── models.rst
+│       │       ├── quartz_vertical.png
+│       │       ├── temporal_se.png
+│       │       ├── tutorial.rst
+│       │       ├── vad_all.bib
+│       │       └── vad_example.png
+│       ├── update_docs_docker.sh
+│       └── update_docs.sh
+├── dst
+│   ├── dialogues_example_dir
+│   │   ├── dstc8_single_domain_custom_examples.processed
+│   │   ├── dstc8_single_domain_dev_examples.processed
+│   │   ├── dstc8_single_domain_test_examples.processed
+│   │   ├── dstc8_single_domain_train_examples.processed
+│   │   └── dstc8_single_domain_train_slots_relation_list.np
+│   ├── fastsgt_predict.py
+│   ├── output
+│   │   └── SGD
+│   │       ├── checkpoints
+│   │       ├── cmd-args_2020-09-25_10-12-42.log
+│   │       ├── cmd-args_2020-09-25_10-12-50.log
+│   │       ├── fastsgt_predict_2020-09-25_10-12-42.py
+│   │       ├── fastsgt_predict_2020-09-25_10-12-50.py
+│   │       ├── git-info_2020-09-25_10-12-42.log
+│   │       ├── git-info_2020-09-25_10-12-50.log
+│   │       ├── log_globalrank-0_localrank-0.txt
+│   │       ├── predictions
+│   │       │   ├── pred_res_custom_dstc8_single_domain
+│   │       │   │   └── dialogues_001.json
+│   │       │   └── pred_res_train_dstc8_single_domain
+│   │       └── tensorboard
+│   │           ├── events.out.tfevents.1600794544.robotlab-ThinkPad-P50.5993.0
+│   │           ├── events.out.tfevents.1600794731.robotlab-ThinkPad-P50.6109.0
+│   │           ├── events.out.tfevents.1600794922.robotlab-ThinkPad-P50.6283.0
+│   │           ├── events.out.tfevents.1600795027.robotlab-ThinkPad-P50.6358.0
+│   │           ├── events.out.tfevents.1600795149.robotlab-ThinkPad-P50.6441.0
+│   │           ├── events.out.tfevents.1600795312.robotlab-ThinkPad-P50.6530.0
+│   │           ├── events.out.tfevents.1600795459.robotlab-ThinkPad-P50.6612.0
+│   │           ├── events.out.tfevents.1600795749.robotlab-ThinkPad-P50.6766.0
+│   │           ├── events.out.tfevents.1600796460.robotlab-ThinkPad-P50.7315.0
+│   │           ├── events.out.tfevents.1600796473.robotlab-ThinkPad-P50.7355.0
+│   │           ├── events.out.tfevents.1600796597.robotlab-ThinkPad-P50.7513.0
+│   │           ├── events.out.tfevents.1600796676.robotlab-ThinkPad-P50.7578.0
+│   │           ├── events.out.tfevents.1600796800.robotlab-ThinkPad-P50.7698.0
+│   │           ├── events.out.tfevents.1600797044.robotlab-ThinkPad-P50.7931.0
+│   │           ├── events.out.tfevents.1600797095.robotlab-ThinkPad-P50.7988.0
+│   │           ├── events.out.tfevents.1600797120.robotlab-ThinkPad-P50.8029.0
+│   │           ├── events.out.tfevents.1600797159.robotlab-ThinkPad-P50.8086.0
+│   │           ├── events.out.tfevents.1600797210.robotlab-ThinkPad-P50.8141.0
+│   │           ├── events.out.tfevents.1600797408.robotlab-ThinkPad-P50.8226.0
+│   │           ├── events.out.tfevents.1600797552.robotlab-ThinkPad-P50.13685.0
+│   │           ├── events.out.tfevents.1600797719.robotlab-ThinkPad-P50.19198.0
+│   │           ├── events.out.tfevents.1600798131.robotlab-ThinkPad-P50.24894.0
+│   │           ├── events.out.tfevents.1600798291.robotlab-ThinkPad-P50.30457.0
+│   │           ├── events.out.tfevents.1600798622.robotlab-ThinkPad-P50.4282.0
+│   │           ├── events.out.tfevents.1600798757.robotlab-ThinkPad-P50.10071.0
+│   │           ├── events.out.tfevents.1600798909.robotlab-ThinkPad-P50.10158.0
+│   │           ├── events.out.tfevents.1600798927.robotlab-ThinkPad-P50.10200.0
+│   │           ├── events.out.tfevents.1600798962.robotlab-ThinkPad-P50.10250.0
+│   │           ├── events.out.tfevents.1600799248.robotlab-ThinkPad-P50.11344.0
+│   │           ├── events.out.tfevents.1600799417.robotlab-ThinkPad-P50.11477.0
+│   │           ├── events.out.tfevents.1600799638.robotlab-ThinkPad-P50.11586.0
+│   │           ├── events.out.tfevents.1600799728.robotlab-ThinkPad-P50.11653.0
+│   │           ├── events.out.tfevents.1600799830.robotlab-ThinkPad-P50.11732.0
+│   │           ├── events.out.tfevents.1600799919.robotlab-ThinkPad-P50.11808.0
+│   │           ├── events.out.tfevents.1600800118.robotlab-ThinkPad-P50.12329.0
+│   │           ├── events.out.tfevents.1600872089.robotlab-ThinkPad-P50.4979.0
+│   │           ├── events.out.tfevents.1600872161.robotlab-ThinkPad-P50.5297.0
+│   │           ├── events.out.tfevents.1600872194.robotlab-ThinkPad-P50.5332.0
+│   │           ├── events.out.tfevents.1600872235.robotlab-ThinkPad-P50.5373.0
+│   │           ├── events.out.tfevents.1600872259.robotlab-ThinkPad-P50.5403.0
+│   │           ├── events.out.tfevents.1600872299.robotlab-ThinkPad-P50.5710.0
+│   │           ├── events.out.tfevents.1600872339.robotlab-ThinkPad-P50.5745.0
+│   │           ├── events.out.tfevents.1600872370.robotlab-ThinkPad-P50.6051.0
+│   │           ├── events.out.tfevents.1600872395.robotlab-ThinkPad-P50.6354.0
+│   │           ├── events.out.tfevents.1600872429.robotlab-ThinkPad-P50.6392.0
+│   │           ├── events.out.tfevents.1600872560.robotlab-ThinkPad-P50.6712.0
+│   │           ├── events.out.tfevents.1600872595.robotlab-ThinkPad-P50.6749.0
+│   │           ├── events.out.tfevents.1600872615.robotlab-ThinkPad-P50.6780.0
+│   │           ├── events.out.tfevents.1600872687.robotlab-ThinkPad-P50.6874.0
+│   │           ├── events.out.tfevents.1600872779.robotlab-ThinkPad-P50.7193.0
+│   │           ├── events.out.tfevents.1600872850.robotlab-ThinkPad-P50.7505.0
+│   │           ├── events.out.tfevents.1600872886.robotlab-ThinkPad-P50.7554.0
+│   │           ├── events.out.tfevents.1600872919.robotlab-ThinkPad-P50.7602.0
+│   │           ├── events.out.tfevents.1600872952.robotlab-ThinkPad-P50.7646.0
+│   │           ├── events.out.tfevents.1600873022.robotlab-ThinkPad-P50.7708.0
+│   │           ├── events.out.tfevents.1600873045.robotlab-ThinkPad-P50.7754.0
+│   │           ├── events.out.tfevents.1600873171.robotlab-ThinkPad-P50.7816.0
+│   │           ├── events.out.tfevents.1600874643.robotlab-ThinkPad-P50.8539.0
+│   │           ├── events.out.tfevents.1600875263.robotlab-ThinkPad-P50.8678.0
+│   │           ├── events.out.tfevents.1600875328.robotlab-ThinkPad-P50.8751.0
+│   │           ├── events.out.tfevents.1600875424.robotlab-ThinkPad-P50.8805.0
+│   │           ├── events.out.tfevents.1600875896.robotlab-ThinkPad-P50.8924.0
+│   │           ├── events.out.tfevents.1600875965.robotlab-ThinkPad-P50.8975.0
+│   │           ├── events.out.tfevents.1600876027.robotlab-ThinkPad-P50.9068.0
+│   │           ├── events.out.tfevents.1600876070.robotlab-ThinkPad-P50.9124.0
+│   │           ├── events.out.tfevents.1600876857.robotlab-ThinkPad-P50.9548.0
+│   │           ├── events.out.tfevents.1600876937.robotlab-ThinkPad-P50.9604.0
+│   │           ├── events.out.tfevents.1600876966.robotlab-ThinkPad-P50.9640.0
+│   │           ├── events.out.tfevents.1600876990.robotlab-ThinkPad-P50.9678.0
+│   │           ├── events.out.tfevents.1600877192.robotlab-ThinkPad-P50.9745.0
+│   │           ├── events.out.tfevents.1600879424.robotlab-ThinkPad-P50.10844.0
+│   │           ├── events.out.tfevents.1600879457.robotlab-ThinkPad-P50.10877.0
+│   │           ├── events.out.tfevents.1600879511.robotlab-ThinkPad-P50.10926.0
+│   │           ├── events.out.tfevents.1600879645.robotlab-ThinkPad-P50.10989.0
+│   │           ├── events.out.tfevents.1600879938.robotlab-ThinkPad-P50.11083.0
+│   │           ├── events.out.tfevents.1600880031.robotlab-ThinkPad-P50.10886.0
+│   │           ├── events.out.tfevents.1600880070.robotlab-ThinkPad-P50.10921.0
+│   │           ├── events.out.tfevents.1600880256.robotlab-ThinkPad-P50.31991.0
+│   │           ├── events.out.tfevents.1600880364.robotlab-ThinkPad-P50.21315.0
+│   │           ├── events.out.tfevents.1600880640.robotlab-ThinkPad-P50.10602.0
+│   │           ├── events.out.tfevents.1600880886.robotlab-ThinkPad-P50.31685.0
+│   │           ├── events.out.tfevents.1600881249.robotlab-ThinkPad-P50.363.0
+│   │           ├── events.out.tfevents.1600881300.robotlab-ThinkPad-P50.22120.0
+│   │           ├── events.out.tfevents.1600881648.robotlab-ThinkPad-P50.23464.0
+│   │           ├── events.out.tfevents.1600881944.robotlab-ThinkPad-P50.13060.0
+│   │           ├── events.out.tfevents.1600882219.robotlab-ThinkPad-P50.24713.0
+│   │           ├── events.out.tfevents.1600882270.robotlab-ThinkPad-P50.4367.0
+│   │           ├── events.out.tfevents.1600882350.robotlab-ThinkPad-P50.16301.0
+│   │           ├── events.out.tfevents.1600882951.robotlab-ThinkPad-P50.28039.0
+│   │           ├── events.out.tfevents.1600883048.robotlab-ThinkPad-P50.7819.0
+│   │           ├── events.out.tfevents.1600883246.robotlab-ThinkPad-P50.19677.0
+│   │           ├── events.out.tfevents.1600883482.robotlab-ThinkPad-P50.5979.0
+│   │           ├── events.out.tfevents.1600883633.robotlab-ThinkPad-P50.12738.0
+│   │           ├── events.out.tfevents.1600884684.robotlab-ThinkPad-P50.21491.0
+│   │           ├── events.out.tfevents.1600884911.robotlab-ThinkPad-P50.28495.0
+│   │           ├── events.out.tfevents.1600885051.robotlab-ThinkPad-P50.3618.0
+│   │           ├── events.out.tfevents.1600885135.robotlab-ThinkPad-P50.3673.0
+│   │           ├── events.out.tfevents.1600885177.robotlab-ThinkPad-P50.3729.0
+│   │           ├── events.out.tfevents.1600889846.robotlab-ThinkPad-P50.5719.0
+│   │           ├── events.out.tfevents.1600889890.robotlab-ThinkPad-P50.6030.0
+│   │           ├── events.out.tfevents.1600890273.robotlab-ThinkPad-P50.25002.0
+│   │           ├── events.out.tfevents.1600890909.robotlab-ThinkPad-P50.379.0
+│   │           ├── events.out.tfevents.1600890955.robotlab-ThinkPad-P50.440.0
+│   │           ├── events.out.tfevents.1600890979.robotlab-ThinkPad-P50.475.0
+│   │           ├── events.out.tfevents.1600891079.robotlab-ThinkPad-P50.820.0
+│   │           ├── events.out.tfevents.1600891315.robotlab-ThinkPad-P50.978.0
+│   │           ├── events.out.tfevents.1600891379.robotlab-ThinkPad-P50.1060.0
+│   │           ├── events.out.tfevents.1600891484.robotlab-ThinkPad-P50.1127.0
+│   │           ├── events.out.tfevents.1600891536.robotlab-ThinkPad-P50.1632.0
+│   │           ├── events.out.tfevents.1600891559.robotlab-ThinkPad-P50.2069.0
+│   │           ├── events.out.tfevents.1600891978.robotlab-ThinkPad-P50.10043.0
+│   │           ├── events.out.tfevents.1601018475.robotlab-ThinkPad-P50.2487.0
+│   │           ├── events.out.tfevents.1601019188.robotlab-ThinkPad-P50.7266.0
+│   │           ├── events.out.tfevents.1601019332.robotlab-ThinkPad-P50.7647.0
+│   │           ├── events.out.tfevents.1601021296.robotlab-ThinkPad-P50.8831.0
+│   │           ├── events.out.tfevents.1601021373.robotlab-ThinkPad-P50.8882.0
+│   │           ├── events.out.tfevents.1601021403.robotlab-ThinkPad-P50.8924.0
+│   │           ├── events.out.tfevents.1601021562.robotlab-ThinkPad-P50.9641.0
+│   │           └── events.out.tfevents.1601021570.robotlab-ThinkPad-P50.9676.0
+│   ├── run_fastsgt_predict.sh
+│   └── schema_embedding_dir
+│       ├── custom_baseline_BertTokenizer_28996_pretrained_schema_embedding.npy
+│       └── train_test_dev_custom_baseline_BertTokenizer_28996_pretrained_schema_embedding.npy
+├── examples
+│   ├── applications
+│   │   └── asr_service
+│   │       ├── app
+│   │       │   ├── __init__.py
+│   │       │   └── routes.py
+│   │       ├── asr_service.py
+│   │       ├── README.rst
+│   │       ├── recognize.html
+│   │       └── requirements.txt
+│   ├── asr
+│   │   ├── an4-lm.3gram.binary
+│   │   ├── configs
+│   │   │   ├── jasper10x5.yaml
+│   │   │   ├── jasper_an4.yaml
+│   │   │   ├── qn-libritts.yaml
+│   │   │   ├── qn-multien.yaml
+│   │   │   ├── quartznet15x5_8kHz.yaml
+│   │   │   ├── quartznet15x5.yaml
+│   │   │   ├── quartznet15x5-zh.yaml
+│   │   │   ├── quartznet_speech_commands_3x1_v1.yaml
+│   │   │   ├── quartznet_speech_commands_3x1_v2.yaml
+│   │   │   └── quartznet_vad_3x1.yaml
+│   │   ├── experimental
+│   │   │   ├── configs
+│   │   │   │   ├── garnet_an4.yaml
+│   │   │   │   ├── garnet_rnn_lm.yaml
+│   │   │   │   ├── garnet.yaml
+│   │   │   │   ├── jasper10x4.yaml
+│   │   │   │   ├── quartznet10x5.yaml
+│   │   │   │   ├── quartznet15x5_groupedconv.yaml
+│   │   │   │   ├── quartznet15x5_in.yaml
+│   │   │   │   ├── quartznet5x3.yaml
+│   │   │   │   ├── quartznet5x5.yaml
+│   │   │   │   └── quartznet_an4.yaml
+│   │   │   ├── contextnet.py
+│   │   │   ├── garnet.py
+│   │   │   └── garnet_rnnlm.py
+│   │   ├── jasper_an4.py
+│   │   ├── notebooks
+│   │   │   ├── 1_ASR_tutorial_using_NeMo.ipynb
+│   │   │   ├── 2_Online_ASR_Microphone_Demo.ipynb
+│   │   │   ├── 3_Speech_Commands_using_NeMo.ipynb
+│   │   │   ├── 4_Online_Data_Augmentation.ipynb
+│   │   │   ├── 5_Online_Speech_Commands_Microphone_Demo.ipynb
+│   │   │   ├── 6_VAD_using_NeMo.ipynb
+│   │   │   ├── 7_VAD_Offline_Online_Microphone_Demo.ipynb
+│   │   │   ├── configs
+│   │   │   │   └── jasper_an4.yaml
+│   │   │   ├── images
+│   │   │   │   └── alignment_example.png
+│   │   │   └── README.md
+│   │   ├── other
+│   │   │   ├── jasper10x5-old.yaml
+│   │   │   ├── jasper_eval.py
+│   │   │   ├── jasper.py
+│   │   │   ├── quartznet15x5-old.yaml
+│   │   │   └── quartznet.py
+│   │   ├── QuartzNetModel.ipynb
+│   │   ├── quartznet_speech_commands.py
+│   │   ├── quartznet_vad.py
+│   │   ├── speech2text_infer.py
+│   │   └── speech2text.py
+│   ├── image
+│   │   ├── gan.py
+│   │   ├── README.md
+│   │   ├── resnet50.py
+│   │   ├── simple_gan.ipynb
+│   │   └── transfer_learning.py
+│   ├── neural_graphs
+│   │   ├── img
+│   │   │   ├── neural_graphs_general.png
+│   │   │   └── neural_graphs_nesting.png
+│   │   ├── neural_graph_advanced.ipynb
+│   │   ├── neural_graph_basic.ipynb
+│   │   └── neural_graph_custom_training.ipynb
+│   ├── nlp
+│   │   ├── asr_postprocessor
+│   │   │   ├── asr_postprocessor.py
+│   │   │   └── get_decoder_params_from_bert.py
+│   │   ├── biobert_notebooks
+│   │   │   ├── biobert_ner.ipynb
+│   │   │   ├── biobert_qa.ipynb
+│   │   │   └── biobert_re.ipynb
+│   │   ├── dialogue_state_tracking
+│   │   │   ├── data
+│   │   │   │   ├── multiwoz
+│   │   │   │   │   ├── correct_categorical_state_values.tsv
+│   │   │   │   │   ├── db
+│   │   │   │   │   │   ├── attraction_db.json
+│   │   │   │   │   │   ├── hospital_db.json
+│   │   │   │   │   │   ├── hotel_db.json
+│   │   │   │   │   │   ├── police_db.json
+│   │   │   │   │   │   ├── restaurant_db.json
+│   │   │   │   │   │   ├── taxi_db.json
+│   │   │   │   │   │   └── train_db.json
+│   │   │   │   │   ├── dev_dials.json
+│   │   │   │   │   ├── __init__.py
+│   │   │   │   │   ├── multiwoz_mapping.pair
+│   │   │   │   │   ├── ontology.json
+│   │   │   │   │   ├── process_multiwoz.py
+│   │   │   │   │   ├── schema.json
+│   │   │   │   │   ├── test_dials.json
+│   │   │   │   │   ├── train_dials.json
+│   │   │   │   │   ├── value_dict.json
+│   │   │   │   │   └── vocab.pkl
+│   │   │   │   └── sgd
+│   │   │   │       ├── convert_multiwoz_to_sgd.py
+│   │   │   │       └── dialogue_augmentation.py
+│   │   │   ├── dialogues_example_dir
+│   │   │   │   ├── debug_sample_custom_examples.processed
+│   │   │   │   ├── debug_sample_dev_examples.processed
+│   │   │   │   ├── debug_sample_test_examples.processed
+│   │   │   │   ├── debug_sample_train_examples.processed
+│   │   │   │   ├── debug_sample_train_slots_relation_list.np
+│   │   │   │   ├── dstc8_single_domain_custom_examples.processed
+│   │   │   │   ├── dstc8_single_domain_dev_examples.processed
+│   │   │   │   ├── dstc8_single_domain_test_examples.processed
+│   │   │   │   ├── dstc8_single_domain_train_examples.processed
+│   │   │   │   └── dstc8_single_domain_train_slots_relation_list.np
+│   │   │   ├── dialogue_state_tracking_sgd.py
+│   │   │   ├── dialogue_state_tracking_trade.py
+│   │   │   ├── fastsgt_test.py
+│   │   │   ├── output
+│   │   │   │   ├── SGD
+│   │   │   │   │   ├── baseline
+│   │   │   │   │   └── fastsgt
+│   │   │   │   │       ├── checkpoints
+│   │   │   │   │       │   ├── BERT-EPOCH-80.pt
+│   │   │   │   │       │   ├── SGDDecoderNM-EPOCH-80.pt
+│   │   │   │   │       │   ├── SGDEncoderNM-EPOCH-80.pt
+│   │   │   │   │       │   └── trainer-EPOCH-80.pt
+│   │   │   │   │       ├── cmd-args_2020-09-20_13-10-59.log
+│   │   │   │   │       ├── cmd-args_2020-09-20_13-14-01.log
+│   │   │   │   │       ├── cmd-args_2020-09-20_13-24-15.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-02-04.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-02-53.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-03-30.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-07-59.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-30-06.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-33-46.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-34-31.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-35-13.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-39-02.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-39-56.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-40-15.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-43-49.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-49-01.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-57-16.log
+│   │   │   │   │       ├── cmd-args_2020-09-21_23-58-11.log
+│   │   │   │   │       ├── cmd-args_2020-09-22_00-05-18.log
+│   │   │   │   │       ├── dialogue_state_tracking_sgd_2020-09-20_13-10-59.py
+│   │   │   │   │       ├── dialogue_state_tracking_sgd_2020-09-20_13-14-01.py
+│   │   │   │   │       ├── dialogue_state_tracking_sgd_2020-09-20_13-24-15.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-02-04.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-02-53.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-03-30.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-07-59.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-30-06.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-33-46.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-34-31.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-35-13.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-39-02.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-39-56.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-40-15.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-43-49.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-49-01.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-57-16.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-21_23-58-11.py
+│   │   │   │   │       ├── fastsgt_test_2020-09-22_00-05-18.py
+│   │   │   │   │       ├── git-info_2020-09-20_13-10-59.log
+│   │   │   │   │       ├── git-info_2020-09-20_13-14-01.log
+│   │   │   │   │       ├── git-info_2020-09-20_13-24-15.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-02-04.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-02-53.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-03-30.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-07-59.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-30-06.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-33-46.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-34-31.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-35-13.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-39-02.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-39-56.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-40-15.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-43-49.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-49-01.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-57-16.log
+│   │   │   │   │       ├── git-info_2020-09-21_23-58-11.log
+│   │   │   │   │       ├── git-info_2020-09-22_00-05-18.log
+│   │   │   │   │       ├── log_globalrank-0_localrank-0.txt
+│   │   │   │   │       ├── predictions
+│   │   │   │   │       │   ├── pred_res_dev_dstc8_single_domain
+│   │   │   │   │       │   │   ├── dialogues_001.json
+│   │   │   │   │       │   │   ├── dialogues_002.json
+│   │   │   │   │       │   │   ├── dialogues_003.json
+│   │   │   │   │       │   │   ├── dialogues_004.json
+│   │   │   │   │       │   │   ├── dialogues_005.json
+│   │   │   │   │       │   │   ├── dialogues_006.json
+│   │   │   │   │       │   │   ├── dialogues_007.json
+│   │   │   │   │       │   │   └── dialogues_and_metrics.json
+│   │   │   │   │       │   └── pred_res_test_dstc8_single_domain
+│   │   │   │   │       │       ├── dialogues_001.json
+│   │   │   │   │       │       ├── dialogues_002.json
+│   │   │   │   │       │       ├── dialogues_003.json
+│   │   │   │   │       │       ├── dialogues_004.json
+│   │   │   │   │       │       ├── dialogues_005.json
+│   │   │   │   │       │       ├── dialogues_006.json
+│   │   │   │   │       │       ├── dialogues_007.json
+│   │   │   │   │       │       ├── dialogues_008.json
+│   │   │   │   │       │       ├── dialogues_009.json
+│   │   │   │   │       │       ├── dialogues_010.json
+│   │   │   │   │       │       ├── dialogues_011.json
+│   │   │   │   │       │       └── dialogues_and_metrics.json
+│   │   │   │   │       └── tensorboard
+│   │   │   │   │           ├── events.out.tfevents.1600597784.robotlab-ThinkPad-P50.6771.0
+│   │   │   │   │           ├── events.out.tfevents.1600598189.robotlab-ThinkPad-P50.6771.1
+│   │   │   │   │           ├── events.out.tfevents.1600600259.robotlab-ThinkPad-P50.28125.0
+│   │   │   │   │           ├── events.out.tfevents.1600600441.robotlab-ThinkPad-P50.28222.0
+│   │   │   │   │           ├── events.out.tfevents.1600601055.robotlab-ThinkPad-P50.29905.0
+│   │   │   │   │           ├── events.out.tfevents.1600601489.robotlab-ThinkPad-P50.29905.1
+│   │   │   │   │           ├── events.out.tfevents.1600722124.robotlab-ThinkPad-P50.6996.0
+│   │   │   │   │           ├── events.out.tfevents.1600722173.robotlab-ThinkPad-P50.7030.0
+│   │   │   │   │           ├── events.out.tfevents.1600722210.robotlab-ThinkPad-P50.7069.0
+│   │   │   │   │           ├── events.out.tfevents.1600722479.robotlab-ThinkPad-P50.7207.0
+│   │   │   │   │           ├── events.out.tfevents.1600723806.robotlab-ThinkPad-P50.7838.0
+│   │   │   │   │           ├── events.out.tfevents.1600724026.robotlab-ThinkPad-P50.7902.0
+│   │   │   │   │           ├── events.out.tfevents.1600724071.robotlab-ThinkPad-P50.7946.0
+│   │   │   │   │           ├── events.out.tfevents.1600724113.robotlab-ThinkPad-P50.8030.0
+│   │   │   │   │           ├── events.out.tfevents.1600724342.robotlab-ThinkPad-P50.8116.0
+│   │   │   │   │           ├── events.out.tfevents.1600724396.robotlab-ThinkPad-P50.8157.0
+│   │   │   │   │           ├── events.out.tfevents.1600724415.robotlab-ThinkPad-P50.8189.0
+│   │   │   │   │           ├── events.out.tfevents.1600724629.robotlab-ThinkPad-P50.8249.0
+│   │   │   │   │           ├── events.out.tfevents.1600724941.robotlab-ThinkPad-P50.8324.0
+│   │   │   │   │           ├── events.out.tfevents.1600725436.robotlab-ThinkPad-P50.8529.0
+│   │   │   │   │           ├── events.out.tfevents.1600725491.robotlab-ThinkPad-P50.8565.0
+│   │   │   │   │           └── events.out.tfevents.1600725918.robotlab-ThinkPad-P50.8733.0
+│   │   │   │   └── TRADE
+│   │   │   │       ├── 2020-09-17_20-34-00
+│   │   │   │       │   └── checkpoints
+│   │   │   │       │       ├── EncoderRNN-EPOCH-10.pt
+│   │   │   │       │       └── TRADEGenerator-EPOCH-10.pt
+│   │   │   │       └── 2020-09-17_21-31-04
+│   │   │   │           ├── cmd-args_2020-09-17_21-31-04.log
+│   │   │   │           ├── dialogue_state_tracking_trade_2020-09-17_21-31-04.py
+│   │   │   │           ├── git-info_2020-09-17_21-31-04.log
+│   │   │   │           ├── log_globalrank-0_localrank-0.txt
+│   │   │   │           └── tensorboard
+│   │   │   │               └── events.out.tfevents.1600371064.robotlab-ThinkPad-P50.14261.0
+│   │   │   ├── rule_based_policy_multiwoz.py
+│   │   │   ├── run_fastsgt.sh
+│   │   │   ├── schema_embedding_dir
+│   │   │   │   └── train_test_dev_baseline_BertTokenizer_28996_pretrained_schema_embedding.npy
+│   │   │   └── trade___dialogue_state_tracker___multiwoz_2_1_1.0.zip
+│   │   ├── glue_benchmark
+│   │   │   └── glue_benchmark_with_bert.py
+│   │   ├── intent_detection_slot_tagging
+│   │   │   ├── data
+│   │   │   │   ├── assistant_utils.py
+│   │   │   │   ├── dialogflow_utils.py
+│   │   │   │   ├── import_datasets.py
+│   │   │   │   └── mturk_utils.py
+│   │   │   ├── joint_intent_slot_infer_b1.py
+│   │   │   ├── joint_intent_slot_infer.py
+│   │   │   └── joint_intent_slot_with_bert.py
+│   │   ├── language_modeling
+│   │   │   ├── bert_pretraining.py
+│   │   │   ├── BERTPretrainingTutorial.ipynb
+│   │   │   ├── create_vocab.py
+│   │   │   ├── get_wkt2.sh
+│   │   │   ├── language_modeling_transformer.py
+│   │   │   └── process_wiki_zh.py
+│   │   ├── lasertagger
+│   │   │   ├── lasertagger_main.py
+│   │   │   ├── lasertagger_preprocessor.py
+│   │   │   ├── official_lasertagger
+│   │   │   │   ├── bert_example.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── sari_hook.py
+│   │   │   │   ├── score_lib.py
+│   │   │   │   ├── tagging_converter.py
+│   │   │   │   ├── tagging.py
+│   │   │   │   └── utils.py
+│   │   │   ├── phrase_vocabulary_optimization.py
+│   │   │   ├── README.md
+│   │   │   └── run_summarization.sh
+│   │   ├── neural_machine_translation
+│   │   │   └── machine_translation_tutorial.py
+│   │   ├── question_answering
+│   │   │   ├── get_bioasq.py
+│   │   │   ├── get_squad.py
+│   │   │   └── question_answering_squad.py
+│   │   ├── text_classification
+│   │   │   ├── data
+│   │   │   │   └── import_datasets.py
+│   │   │   ├── sentiment_analysis_with_bert.ipynb
+│   │   │   └── text_classification_with_bert.py
+│   │   └── token_classification
+│   │       ├── get_medical_data.py
+│   │       ├── get_tatoeba_data.py
+│   │       ├── import_from_iob_format.py
+│   │       ├── NERWithBERT.ipynb
+│   │       ├── punctuation_capitalization_infer.py
+│   │       ├── punctuation_capitalization.py
+│   │       ├── PunctuationWithBERT.ipynb
+│   │       ├── token_classification_infer.py
+│   │       └── token_classification.py
+│   ├── speaker_recognition
+│   │   ├── configs
+│   │   │   ├── jasper_spkr_3x2x512_xvector_softmax_emb512_aug_M.yaml
+│   │   │   ├── quartznet_spkr_3x1x512_xvector.yaml
+│   │   │   ├── quartznet_spkr_3x2x512_xvector_softmax_emb512_aug_M.yaml
+│   │   │   ├── quartznet_spkr_3x2x512_xvector.yaml
+│   │   │   └── quartznet_spkr_5x1x512_xvector.yaml
+│   │   ├── hi-mia_eval.py
+│   │   ├── kaldi_plda.py
+│   │   ├── notebooks
+│   │   │   ├── Speaker_Recognition_an4.ipynb
+│   │   │   ├── Speaker_Recognition_hi-mia.ipynb
+│   │   │   └── speaker_reco.jpg
+│   │   ├── README.txt
+│   │   ├── speaker_reco.py
+│   │   ├── spkr_get_emb.py
+│   │   ├── train_plda.sh
+│   │   └── voxceleb_eval.py
+│   ├── start_here
+│   │   ├── chatbot_example.py
+│   │   ├── module_configuration.py
+│   │   ├── module_custom_configuration.py
+│   │   ├── README.md
+│   │   └── simplest_example.py
+│   └── tts
+│       ├── configs
+│       │   ├── fastspeech.yaml
+│       │   ├── tacotron2_mandarin.yaml
+│       │   ├── tacotron2.yaml
+│       │   ├── talknet-durs-lj.yaml
+│       │   ├── talknet-mels-lj.yaml
+│       │   ├── talknet-mels-lt.yaml
+│       │   └── waveglow.yaml
+│       ├── fastspeech_durations.py
+│       ├── fastspeech.py
+│       ├── notebooks
+│       │   └── 1_Tacotron_inference.ipynb
+│       ├── tacotron2.py
+│       ├── tacotron2_v0p9.py
+│       ├── talknet_durs.py
+│       ├── talknet_mels.py
+│       ├── tts_infer.py
+│       ├── waveglow.py
+│       └── waveglow_v0p9.py
+├── Jenkinsfile
+├── LICENSE
+├── MANIFEST.in
+├── nemo
+│   ├── backends
+│   │   ├── __init__.py
+│   │   ├── load_backend.py
+│   │   ├── __pycache__
+│   │   ├── pytorch
+│   │   │   ├── actions.py
+│   │   │   ├── common
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── losses.py
+│   │   │   │   ├── metrics.py
+│   │   │   │   ├── multi_data.py
+│   │   │   │   ├── other.py
+│   │   │   │   ├── parts.py
+│   │   │   │   ├── __pycache__
+│   │   │   │   ├── rnn.py
+│   │   │   │   ├── search.py
+│   │   │   │   └── zero_data.py
+│   │   │   ├── __init__.py
+│   │   │   ├── module_wrapper.py
+│   │   │   ├── nm.py
+│   │   │   ├── optimizers.py
+│   │   │   ├── __pycache__
+│   │   │   ├── torchvision
+│   │   │   │   ├── data
+│   │   │   │   │   ├── image_folder.py
+│   │   │   │   │   ├── __init__.py
+│   │   │   │   │   └── __pycache__
+│   │   │   │   ├── helpers.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── __pycache__
+│   │   │   └── tutorials
+│   │   │       ├── chatbot
+│   │   │       │   ├── data.py
+│   │   │       │   ├── __init__.py
+│   │   │       │   ├── modules.py
+│   │   │       │   └── __pycache__
+│   │   │       ├── __init__.py
+│   │   │       ├── __pycache__
+│   │   │       └── toys.py
+│   │   └── torch_backend.py
+│   ├── collections
+│   │   ├── asr
+│   │   │   ├── audio_preprocessing.py
+│   │   │   ├── beam_search_decoder.py
+│   │   │   ├── contextnet.py
+│   │   │   ├── data_layer.py
+│   │   │   ├── greedy_ctc_decoder.py
+│   │   │   ├── helpers.py
+│   │   │   ├── __init__.py
+│   │   │   ├── jasper.py
+│   │   │   ├── las
+│   │   │   │   ├── helpers.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── misc.py
+│   │   │   │   └── __pycache__
+│   │   │   ├── losses.py
+│   │   │   ├── metrics.py
+│   │   │   ├── models
+│   │   │   │   ├── asrconvctcmodel.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── __pycache__
+│   │   │   ├── parts
+│   │   │   │   ├── cleaners.py
+│   │   │   │   ├── collections.py
+│   │   │   │   ├── dataset.py
+│   │   │   │   ├── features.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── jasper.py
+│   │   │   │   ├── manifest.py
+│   │   │   │   ├── numba_utils.py
+│   │   │   │   ├── parsers.py
+│   │   │   │   ├── perturb.py
+│   │   │   │   ├── __pycache__
+│   │   │   │   ├── segment.py
+│   │   │   │   └── spectr_augment.py
+│   │   │   ├── __pycache__
+│   │   │   └── README.md
+│   │   ├── cv
+│   │   │   ├── examples
+│   │   │   │   ├── cifar100_vgg16_ffn_image_classification.py
+│   │   │   │   ├── cifar10_convnet_ffn_image_classification.py
+│   │   │   │   ├── cifar10_resnet50_image_classification.py
+│   │   │   │   ├── mnist_convnet_ffn_image_classification.py
+│   │   │   │   ├── mnist_ffn_image_classification.py
+│   │   │   │   └── mnist_lenet5_image_classification.py
+│   │   │   ├── __init__.py
+│   │   │   ├── modules
+│   │   │   │   ├── data_layers
+│   │   │   │   │   ├── cifar100_datalayer.py
+│   │   │   │   │   ├── cifar10_datalayer.py
+│   │   │   │   │   ├── __init__.py
+│   │   │   │   │   ├── mnist_datalayer.py
+│   │   │   │   │   └── stl10_datalayer.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── losses
+│   │   │   │   │   ├── __init__.py
+│   │   │   │   │   └── nll_loss.py
+│   │   │   │   ├── non_trainables
+│   │   │   │   │   ├── __init__.py
+│   │   │   │   │   ├── non_linearity.py
+│   │   │   │   │   └── reshape_tensor.py
+│   │   │   │   └── trainables
+│   │   │   │       ├── convnet_encoder.py
+│   │   │   │       ├── feed_forward_network.py
+│   │   │   │       ├── image_encoder.py
+│   │   │   │       ├── __init__.py
+│   │   │   │       └── lenet5.py
+│   │   │   └── README.md
+│   │   ├── __init__.py
+│   │   ├── nlp
+│   │   │   ├── callbacks
+│   │   │   │   ├── glue_benchmark_callback.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── joint_intent_slot_callback.py
+│   │   │   │   ├── lasertagger_callback.py
+│   │   │   │   ├── lm_bert_callback.py
+│   │   │   │   ├── lm_transformer_callback.py
+│   │   │   │   ├── machine_translation_callback.py
+│   │   │   │   ├── punctuation_capitalization_callback.py
+│   │   │   │   ├── __pycache__
+│   │   │   │   ├── qa_squad_callback.py
+│   │   │   │   ├── sgd_callback.py
+│   │   │   │   ├── state_tracking_trade_callback.py
+│   │   │   │   ├── text_classification_callback.py
+│   │   │   │   └── token_classification_callback.py
+│   │   │   ├── data
+│   │   │   │   ├── datasets
+│   │   │   │   │   ├── datasets_utils
+│   │   │   │   │   │   ├── data_preprocessing.py
+│   │   │   │   │   │   ├── datasets_processing.py
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   └── __pycache__
+│   │   │   │   │   ├── glue_benchmark_dataset
+│   │   │   │   │   │   ├── data_processors.py
+│   │   │   │   │   │   ├── glue_benchmark_dataset.py
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   └── __pycache__
+│   │   │   │   │   ├── __init__.py
+│   │   │   │   │   ├── joint_intent_slot_dataset
+│   │   │   │   │   │   ├── inference_utils.py
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── joint_intent_slot_dataset.py
+│   │   │   │   │   │   ├── joint_intent_slot_descriptor.py
+│   │   │   │   │   │   └── __pycache__
+│   │   │   │   │   ├── lasertagger_dataset.py
+│   │   │   │   │   ├── lm_bert_dataset.py
+│   │   │   │   │   ├── lm_transformer_dataset.py
+│   │   │   │   │   ├── machine_translation_dataset.py
+│   │   │   │   │   ├── multiwoz_dataset
+│   │   │   │   │   │   ├── dbquery.py
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── multiwoz_dataset.py
+│   │   │   │   │   │   ├── multiwoz_slot_trans.py
+│   │   │   │   │   │   ├── __pycache__
+│   │   │   │   │   │   └── state.py
+│   │   │   │   │   ├── punctuation_capitalization_dataset.py
+│   │   │   │   │   ├── __pycache__
+│   │   │   │   │   ├── qa_squad_dataset
+│   │   │   │   │   │   ├── __pycache__
+│   │   │   │   │   │   ├── qa_squad_dataset.py
+│   │   │   │   │   │   └── qa_squad_processing.py
+│   │   │   │   │   ├── sgd_dataset
+│   │   │   │   │   │   ├── data_processor.py
+│   │   │   │   │   │   ├── evaluate.py
+│   │   │   │   │   │   ├── input_example.py
+│   │   │   │   │   │   ├── metrics.py
+│   │   │   │   │   │   ├── prediction_utils.py
+│   │   │   │   │   │   ├── __pycache__
+│   │   │   │   │   │   ├── schema_embedding_dataset.py
+│   │   │   │   │   │   ├── schema_processor.py
+│   │   │   │   │   │   ├── schema.py
+│   │   │   │   │   │   └── sgd_dataset.py
+│   │   │   │   │   ├── text_classification
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── __pycache__
+│   │   │   │   │   │   ├── text_classification_dataset.py
+│   │   │   │   │   │   └── text_classification_descriptor.py
+│   │   │   │   │   └── token_classification_dataset.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── __pycache__
+│   │   │   │   └── tokenizers
+│   │   │   │       ├── bert_tokenizer.py
+│   │   │   │       ├── char_tokenizer.py
+│   │   │   │       ├── fairseq_tokenizer.py
+│   │   │   │       ├── gpt2_tokenizer.py
+│   │   │   │       ├── __init__.py
+│   │   │   │       ├── __pycache__
+│   │   │   │       ├── sentencepiece_tokenizer.py
+│   │   │   │       ├── tokenizer_spec.py
+│   │   │   │       ├── tokenizer_utils.py
+│   │   │   │       ├── word_tokenizer.py
+│   │   │   │       └── youtokentome_tokenizer.py
+│   │   │   ├── __init__.py
+│   │   │   ├── metrics
+│   │   │   │   ├── bleu.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── __pycache__
+│   │   │   │   ├── sacrebleu.py
+│   │   │   │   └── squad_metrics.py
+│   │   │   ├── neural_types.py
+│   │   │   ├── nm
+│   │   │   │   ├── data_layers
+│   │   │   │   │   ├── bert_inference_datalayer.py
+│   │   │   │   │   ├── glue_benchmark_datalayer.py
+│   │   │   │   │   ├── __init__.py
+│   │   │   │   │   ├── joint_intent_slot_datalayer.py
+│   │   │   │   │   ├── lasertagger_datalayer.py
+│   │   │   │   │   ├── lm_bert_datalayer.py
+│   │   │   │   │   ├── lm_transformer_datalayer.py
+│   │   │   │   │   ├── machine_translation_datalayer.py
+│   │   │   │   │   ├── punctuation_capitalization_datalayer.py
+│   │   │   │   │   ├── __pycache__
+│   │   │   │   │   ├── qa_squad_datalayer.py
+│   │   │   │   │   ├── state_tracking_sgd_datalayer.py
+│   │   │   │   │   ├── state_tracking_trade_datalayer.py
+│   │   │   │   │   ├── text_classification_datalayer.py
+│   │   │   │   │   ├── text_datalayer.py
+│   │   │   │   │   └── token_classification_datalayer.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── losses
+│   │   │   │   │   ├── __init__.py
+│   │   │   │   │   ├── masked_xentropy_loss.py
+│   │   │   │   │   ├── __pycache__
+│   │   │   │   │   ├── sgd_loss.py
+│   │   │   │   │   ├── smoothed_cross_entropy_loss.py
+│   │   │   │   │   └── spanning_loss.py
+│   │   │   │   ├── non_trainables
+│   │   │   │   │   ├── dialogue_state_tracking
+│   │   │   │   │   │   ├── auto_system_template_nlg.json
+│   │   │   │   │   │   ├── manual_system_template_nlg.json
+│   │   │   │   │   │   ├── rule_based_dpm_multiwoz.py
+│   │   │   │   │   │   ├── system_utterance_history_update.py
+│   │   │   │   │   │   ├── template_nlg_multiwoz.py
+│   │   │   │   │   │   ├── trade_state_update_nm.py
+│   │   │   │   │   │   └── user_utterance_encoder.py
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── __pycache__
+│   │   │   │   └── trainables
+│   │   │   │       ├── common
+│   │   │   │       │   ├── common_utils.py
+│   │   │   │       │   ├── encoder_rnn.py
+│   │   │   │       │   ├── huggingface
+│   │   │   │       │   │   ├── albert_nm.py
+│   │   │   │       │   │   ├── bert_nm.py
+│   │   │   │       │   │   ├── huggingface_utils.py
+│   │   │   │       │   │   ├── __init__.py
+│   │   │   │       │   │   ├── __pycache__
+│   │   │   │       │   │   └── roberta_nm.py
+│   │   │   │       │   ├── __init__.py
+│   │   │   │       │   ├── megatron
+│   │   │   │       │   │   ├── __init__.py
+│   │   │   │       │   │   ├── megatron_bert_nm.py
+│   │   │   │       │   │   ├── megatron_utils.py
+│   │   │   │       │   │   └── __pycache__
+│   │   │   │       │   ├── __pycache__
+│   │   │   │       │   ├── sequence_classification_nm.py
+│   │   │   │       │   ├── sequence_regression_nm.py
+│   │   │   │       │   ├── token_classification_nm.py
+│   │   │   │       │   └── transformer
+│   │   │   │       │       ├── __init__.py
+│   │   │   │       │       ├── __pycache__
+│   │   │   │       │       ├── transformer_decoders.py
+│   │   │   │       │       ├── transformer_encoders.py
+│   │   │   │       │       ├── transformer_generators.py
+│   │   │   │       │       ├── transformer_modules.py
+│   │   │   │       │       └── transformer_nm.py
+│   │   │   │       ├── dialogue_state_tracking
+│   │   │   │       │   ├── __init__.py
+│   │   │   │       │   ├── __pycache__
+│   │   │   │       │   ├── sgd
+│   │   │   │       │   │   ├── __init__.py
+│   │   │   │       │   │   ├── __pycache__
+│   │   │   │       │   │   ├── sgd_decoder_nm.py
+│   │   │   │       │   │   └── sgd_encoder_nm.py
+│   │   │   │       │   └── trade_generator_nm.py
+│   │   │   │       ├── __init__.py
+│   │   │   │       ├── joint_intent_slot
+│   │   │   │       │   ├── __init__.py
+│   │   │   │       │   ├── joint_intent_slot_classifier_nm.py
+│   │   │   │       │   └── __pycache__
+│   │   │   │       ├── punctuation_capitalization
+│   │   │   │       │   ├── __init__.py
+│   │   │   │       │   ├── punctuation_capitalization_classifier_nm.py
+│   │   │   │       │   └── __pycache__
+│   │   │   │       └── __pycache__
+│   │   │   ├── __pycache__
+│   │   │   ├── README.md
+│   │   │   └── utils
+│   │   │       ├── callback_utils.py
+│   │   │       ├── data_utils.py
+│   │   │       ├── evaluation_utils.py
+│   │   │       ├── functional_utils.py
+│   │   │       ├── __init__.py
+│   │   │       ├── __pycache__
+│   │   │       └── transformer_utils.py
+│   │   ├── __pycache__
+│   │   ├── simple_gan
+│   │   │   ├── gan.py
+│   │   │   ├── __init__.py
+│   │   │   └── README.md
+│   │   └── tts
+│   │       ├── data_layers.py
+│   │       ├── fastspeech_modules.py
+│   │       ├── __init__.py
+│   │       ├── parts
+│   │       │   ├── datasets.py
+│   │       │   ├── fastspeech.py
+│   │       │   ├── fastspeech_transformer.py
+│   │       │   ├── helpers.py
+│   │       │   ├── __init__.py
+│   │       │   ├── layers.py
+│   │       │   ├── manifest.py
+│   │       │   ├── tacotron2.py
+│   │       │   ├── talknet.py
+│   │       │   └── waveglow.py
+│   │       ├── README.md
+│   │       ├── tacotron2_modules.py
+│   │       ├── talknet_modules.py
+│   │       └── waveglow_modules.py
+│   ├── constants.py
+│   ├── core
+│   │   ├── actions.py
+│   │   ├── callbacks.py
+│   │   ├── custom
+│   │   ├── deprecated_callbacks.py
+│   │   ├── __init__.py
+│   │   ├── module_decorators.py
+│   │   ├── nemo_model.py
+│   │   ├── neural_factory.py
+│   │   ├── neural_graph.py
+│   │   ├── neural_interface.py
+│   │   ├── neural_modules.py
+│   │   ├── neural_types
+│   │   │   ├── axes.py
+│   │   │   ├── comparison.py
+│   │   │   ├── elements.py
+│   │   │   ├── __init__.py
+│   │   │   ├── neural_type.py
+│   │   │   └── __pycache__
+│   │   └── __pycache__
+│   ├── __init__.py
+│   ├── package_info.py
+│   ├── __pycache__
+│   ├── README.md
+│   └── utils
+│       ├── app_state.py
+│       ├── argparse.py
+│       ├── configuration_error.py
+│       ├── configuration_parsing.py
+│       ├── decorators
+│       │   ├── deprecated.py
+│       │   ├── __init__.py
+│       │   ├── port_docs.py
+│       │   └── __pycache__
+│       ├── env_var_parsing.py
+│       ├── exp_logging.py
+│       ├── formatters
+│       │   ├── base.py
+│       │   ├── colors.py
+│       │   ├── __init__.py
+│       │   ├── __pycache__
+│       │   └── utils.py
+│       ├── helpers.py
+│       ├── __init__.py
+│       ├── lr_policies.py
+│       ├── metaclasses.py
+│       ├── misc.py
+│       ├── nemo_logging.py
+│       ├── neural_graph
+│       │   ├── connection.py
+│       │   ├── graph_inputs.py
+│       │   ├── graph_outputs.py
+│       │   ├── neural_graph_manager.py
+│       │   ├── object_registry.py
+│       │   └── __pycache__
+│       ├── nmtensor_registry.py
+│       └── __pycache__
+├── nemo_toolkit.egg-info
+│   ├── dependency_links.txt
+│   ├── entry_points.txt
+│   ├── not-zip-safe
+│   ├── PKG-INFO
+│   ├── requires.txt
+│   ├── SOURCES.txt
+│   └── top_level.txt
+├── README.rst
+├── reinstall.sh
+├── requirements
+│   ├── requirements_asr.txt
+│   ├── requirements_cv.txt
+│   ├── requirements_docker.txt
+│   ├── requirements_docs.txt
+│   ├── requirements_nlp.txt
+│   ├── requirements_simple_gan.txt
+│   ├── requirements_test.txt
+│   ├── requirements_tts.txt
+│   └── requirements.txt
+├── requirements2.txt
+├── requirements.txt
+├── scripts
+│   ├── build_6-gram_OpenSLR_lm.sh
+│   ├── build_lm_text.py
+│   ├── convert_to_tarred_audio_dataset.py
+│   ├── convert_wav_to_g711wav.py
+│   ├── docker
+│   │   └── onnx-trt.patch
+│   ├── export_bert_to_trt.py
+│   ├── export_jasper_onnx_to_trt.py
+│   ├── export_jasper_to_onnx.py
+│   ├── fisher_audio_to_wav.py
+│   ├── freesound_download_resample
+│   │   ├── download_resample_freesound.sh
+│   │   ├── freesound_download.py
+│   │   ├── freesound_requirements.txt
+│   │   └── freesound_resample.py
+│   ├── get_aishell_data.py
+│   ├── get_databaker_data.py
+│   ├── get_hi-mia_data.py
+│   ├── get_librispeech_data.py
+│   ├── get_ljspeech_data.py
+│   ├── get_timit_data.py
+│   ├── __init__.py
+│   ├── install_decoders_MacOS.sh
+│   ├── install_decoders.sh
+│   ├── integration
+│   │   ├── get_collections.py
+│   │   ├── get_module_outputs.py
+│   │   ├── get_module_ports.py
+│   │   ├── get_modules.py
+│   │   ├── __init__.py
+│   │   └── validate_connections.py
+│   ├── process_aishell2_data.py
+│   ├── process_an4_data.py
+│   ├── process_fisher_data.py
+│   ├── process_hub5_data.py
+│   ├── process_speech_commands_data.py
+│   ├── process_vad_data.py
+│   ├── quartznet_model_for_jarvis.py
+│   └── scp_to_manifest.py
+├── setup.cfg
+├── setup.py
+├── tests
+│   ├── configs
+│   │   └── test_deploy_export.yaml
+│   ├── conftest.py
+│   ├── data
+│   │   ├── an4_speaker.tar.gz
+│   │   ├── asr.tar.gz
+│   │   ├── contextnet_32.yaml
+│   │   ├── dialog_sample.txt
+│   │   ├── en_de
+│   │   │   ├── bpe8k_yttm.model
+│   │   │   ├── train.de
+│   │   │   ├── train.en
+│   │   │   ├── valid.de
+│   │   │   └── valid.en
+│   │   ├── eval.txt
+│   │   ├── jasper_smaller.yaml
+│   │   ├── m_common.model
+│   │   ├── movie_lines.txt.gz
+│   │   ├── ner_zh_sample_data
+│   │   │   ├── labels_dev.txt
+│   │   │   ├── labels_train.txt
+│   │   │   ├── README.md
+│   │   │   ├── text_dev.txt
+│   │   │   └── text_train.txt
+│   │   ├── nmt_en_zh_sample_data
+│   │   │   ├── en_yttm.model
+│   │   │   ├── README.md
+│   │   │   ├── train.en
+│   │   │   ├── train.zh
+│   │   │   ├── valid.en
+│   │   │   ├── valid.zh
+│   │   │   └── zh_vocab.txt
+│   │   ├── pred_real
+│   │   │   ├── train.pred
+│   │   │   ├── train.real
+│   │   │   ├── valid.pred
+│   │   │   └── valid.real
+│   │   ├── quartznet_speech_recognition.yaml
+│   │   ├── quartznet_spkr_test.yaml
+│   │   ├── quartznet_test.yaml
+│   │   ├── quartznet_vad.yaml
+│   │   ├── sc_zh_sample_data
+│   │   │   ├── data
+│   │   │   │   ├── 健康
+│   │   │   │   │   ├── 00001.txt
+│   │   │   │   │   ├── 00002.txt
+│   │   │   │   │   ├── 00003.txt
+│   │   │   │   │   ├── 00004.txt
+│   │   │   │   │   ├── 00005.txt
+│   │   │   │   │   ├── 00006.txt
+│   │   │   │   │   ├── 00007.txt
+│   │   │   │   │   ├── 00008.txt
+│   │   │   │   │   ├── 00009.txt
+│   │   │   │   │   └── 00010.txt
+│   │   │   │   ├── 旅游
+│   │   │   │   │   ├── 00001.txt
+│   │   │   │   │   ├── 00002.txt
+│   │   │   │   │   ├── 00003.txt
+│   │   │   │   │   ├── 00004.txt
+│   │   │   │   │   ├── 00005.txt
+│   │   │   │   │   ├── 00006.txt
+│   │   │   │   │   ├── 00007.txt
+│   │   │   │   │   ├── 00008.txt
+│   │   │   │   │   ├── 00009.txt
+│   │   │   │   │   └── 00010.txt
+│   │   │   │   └── 艺术
+│   │   │   │       ├── 00001.txt
+│   │   │   │       ├── 00002.txt
+│   │   │   │       ├── 00003.txt
+│   │   │   │       ├── 00004.txt
+│   │   │   │       ├── 00005.txt
+│   │   │   │       ├── 00006.txt
+│   │   │   │       ├── 00007.txt
+│   │   │   │       ├── 00008.txt
+│   │   │   │       ├── 00009.txt
+│   │   │   │       └── 00010.txt
+│   │   │   └── README.md
+│   │   ├── speech_commands.tar.xz
+│   │   └── vad.tar.xz
+│   ├── docs
+│   │   └── test_documentation.py
+│   ├── __init__.py
+│   ├── integration
+│   │   ├── core
+│   │   │   └── test_integration_neural_graph.py
+│   │   ├── test_asr_gradient_step_and_eval.py
+│   │   ├── test_integration_multidataset.py
+│   │   ├── test_speaker_recognition_gradient_step.py
+│   │   ├── test_speechcommands_gradient_step_and_eval.py
+│   │   ├── test_tts_gradient_step.py
+│   │   └── test_vad_gradient_step_and_eval.py
+│   ├── system
+│   │   ├── test_infer.py
+│   │   └── test_pytorch_trainers.py
+│   └── unit
+│       ├── core
+│       │   ├── __init__.py
+│       │   ├── neural_graph
+│       │   │   ├── test_neural_graph_binding.py
+│       │   │   ├── test_neural_graph_import_export.py
+│       │   │   ├── test_neural_graph_nesting.py
+│       │   │   ├── test_neural_graph_serialization.py
+│       │   │   └── test_neural_graphs.py
+│       │   ├── neural_module
+│       │   │   ├── test_module_configuration_export.py
+│       │   │   ├── test_module_configuration_import.py
+│       │   │   ├── test_module_configuration.py
+│       │   │   ├── test_module_decorators.py
+│       │   │   └── test_module_initialization.py
+│       │   ├── tensorrt_format.py
+│       │   ├── tensorrt_loaders.py
+│       │   ├── tensorrt_runner.py
+│       │   ├── test_actions_api.py
+│       │   ├── test_deploy_export.py
+│       │   ├── test_model.py
+│       │   ├── test_nemo_callbacks.py
+│       │   ├── test_neural_types.py
+│       │   ├── test_nm_tensor.py
+│       │   ├── test_policies.py
+│       │   └── test_weight_share.py
+│       ├── __init__.py
+│       ├── test_huggingface.py
+│       ├── test_spc_tokenizer.py
+│       ├── test_torch_backend.py
+│       ├── test_tutorials_cornell_data.py
+│       ├── test_unit_asr.py
+│       ├── test_unit_multidataset.py
+│       ├── test_unit_speech_commands.py
+│       └── utils
+│           ├── test_app_state.py
+│           ├── test_deprecated.py
+│           └── test_object_registry.py
+└── tree
+
+286 directories, 1363 files
