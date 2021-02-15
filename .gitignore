@@ -10,6 +10,10 @@ bert.pt.json
 work
 runs
 fastspeech_output
+*.npy
+*.np
+*.processed
+events.out*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
