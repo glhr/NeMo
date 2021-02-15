@@ -751,7 +751,7 @@ def change_to_nemo_id(dialogs_list, file_index):
 
 def main():
     schema_path = os.path.join(_DIR_PATH, args.schema_file_name)
-    schemas = schema.Schema(schema_path)
+    schemas = schema.Schema(schema_path,False,False)
     processor = Processor(schemas)
     data_path = os.path.join(args.input_data_dir, 'data.json')
     with open(data_path, 'r') as f:

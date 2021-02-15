@@ -599,7 +599,7 @@ class PtActions(Actions):
                     if hasattr(callback, 'wandb_log'):
                         callback.wandb_log(vals_to_log)
 
-    def _infer(self, tensors_to_return, verbose=False, cache=False, use_cache=False, offload_to_cpu=True):
+    def _infer(self, tensors_to_return, verbose=False, cache=False, use_cache=False, offload_to_cpu=True, return_values_dict=False):
         """
         Does the same as _eval() just with tensors instead of eval callback.
         """
@@ -776,7 +776,9 @@ class PtActions(Actions):
                 for t in tensors_to_return:
                     inferred_tensors.append(values_dict[t.unique_name])
                 # print(values_dict)
-                return values_dict
+                if return_values_dict:
+                    return values_dict
+                return inferred_tensors
 
             # For all other ranks
             return None
@@ -1544,6 +1546,7 @@ class PtActions(Actions):
         use_cache=False,
         offload_to_cpu=True,
         modules_to_restore=None,
+        return_values_dict=False
     ):
         """See NeuralModuleFactory.infer()
         """
@@ -1599,6 +1602,7 @@ class PtActions(Actions):
             cache=cache,
             use_cache=use_cache,
             offload_to_cpu=offload_to_cpu,
+            return_values_dict=return_values_dict
         )
 
     def get_DDP_modules(self, call_chain):

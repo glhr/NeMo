@@ -354,6 +354,7 @@ class NeuralModuleFactory(object):
         use_cache=False,
         offload_to_cpu=True,
         modules_to_restore=None,
+        return_values_dict=False
     ):
         """Runs inference to obtain values for tensors
 
@@ -392,6 +393,7 @@ class NeuralModuleFactory(object):
             use_cache=use_cache,
             offload_to_cpu=offload_to_cpu,
             modules_to_restore=modules_to_restore,
+            return_values_dict=return_values_dict
         )
 
     def clear_cache(self):

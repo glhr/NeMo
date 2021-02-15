@@ -36,10 +36,10 @@ __all__ = ['SchemaPreprocessor']
 
 
 class SchemaPreprocessor:
-    """ 
+    """
     Convert the raw data to the standard format supported by
     StateTrackingSGDData.
-    
+
     Args:
         data_dir (str) - Directory for the downloaded DSTC8/SGD data, which contains
             the dialogue files and schema files of all datasets (eg train, dev)
@@ -77,7 +77,7 @@ class SchemaPreprocessor:
         nf,
         add_carry_value,
         add_carry_status,
-        datasets=['train', 'test', 'dev'],
+        datasets=['train', 'test', 'dev', 'custom'],
         mode='baseline',
         is_trainable=False,
     ):
@@ -96,7 +96,7 @@ class SchemaPreprocessor:
         else:
             self._slot_status_size = 3
 
-        for dataset_split in ['train', 'test', 'dev']:
+        for dataset_split in ['train', 'test', 'dev', 'custom']:
             if dataset_split not in self.datasets:
                 logging.warning(
                     'WARNING: %s set was not included and won\'t be processed. Services from this dataset split '
